@@ -4,35 +4,13 @@ created: 2026-08-20
 updated: 2026-08-20
 ---
 
-The Site is still for a stranger who might hire. Competence is direct and
-innovative — shown, not a wall of text. First impression is how they decide
-to stay. After that, **impressions** are the feedback loop: what they did,
-not what we hoped they would feel.
+I deleted the prompt you wrote since it makes you consider too many things. We are in 
+a discovery method here and just thinking about impressions users can make. The 
+impression is where any user interaction starts so it is a first principles thing to 
+consider. 
 
-Page jobs are in [site/pages.md](../site/pages.md). Types
-([Impression](../ontology.md), Experience, Problem set, Lesson) are in
-[ontology.md](../ontology.md). The four consultant sites were the contrast:
-[discovery/05-consultant-sites.md](05-consultant-sites.md), lasting list in
-[references/consultant-sites.md](../references/consultant-sites.md). Looking
-as a method is still [You have to look](06-you-have-to-look.md).
-
-Lesson should come from the problem sets a visitor showed interest in.
-That only works if an interaction can *count* as interest.
-
-Tomorrow, write into this:
-
-**Name one interaction a stranger could do on this Site that would count
-as an impression — not a pageview. What they do. What you would know
-afterward that you did not know. Which problem set or Lesson that would
-feed.**
-
-Not a catalog of widgets. One thing. An emoji, an easter egg, a choice in
-a 3D passage or an ink branch, a form they meant — pick one you would
-actually ship. If Home is space, does this live there, or only after they
-have already stayed? What would be too much interaction for the same
-knowledge?
-
-Write under the question. Ignore the prompt if a better sentence shows up.
+You originally asked me to consider one thing a user could do as an interaction on the 
+website and I replied...
 
 ---
 
@@ -51,8 +29,16 @@ Does this come from magazines and newspapers putting their content online and ev
 copying that?
 
 We should analyze the primitives of interaction and why the most common form of the 
-website exists and has not changed since the beginning of the web. 
+website exists and has not changed since the beginning of the web.
 
-Also, I find your prompts weird. They are, like, aggressive telling me what not to do. 
-Why? When you give me a prompt, you don't need to tell me what not to do. Why are you 
-making the prompt so limiting when we are trying to do discovery?
+Try to think about directing people to certain URLs + query params. The homepage would 
+be blank enough but not anything with a URI.
+
+We can use HTMX to load and place content but the first draft should be static and 
+assembled from many HTML files in some sort of order or pattern. I suppose returning 
+HTML via REST-ful interface fits well with HTMX principles and the whole REST API 
+could be static and deployed.
+
+Of course, GET is the only proper HTTP verb, but maybe a POST to a GitHub trigger or 
+to an email address that would then do other things could work. Also there are cheap 
+form submission options that might work too.

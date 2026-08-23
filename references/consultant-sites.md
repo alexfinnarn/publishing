@@ -72,8 +72,8 @@ Same failure mode as the playground `/work` page, with better credentials.
 | [Drupal.org services](https://new.drupal.org/drupal-services) | Partner directory | How some buyers still search. |
 | [preston.so/about](https://preston.so/about/) | Product / CMS category | Conference + category creation. Contrast, not a model. |
 
-If a site shows a feedback loop, an interactive first impression, or a
-lesson that is not a brochure, add it. That is the gap these four left.
+If a site offers an impression worth taking, or a lesson that is not a
+brochure, add it. That is the gap these four left.
 
 ## What this Site is doing instead
 
@@ -86,7 +86,7 @@ Here:
 - Home is space and craft (maybe a 3D or story passage)
 - Problem sets, not a services grid
 - Lesson from what they showed interest in, then talk
-- Impressions as a loop, not a one-shot guess
+- Impressions as the start of interaction, not a guess about chrome
 - No policy page that censors the incoming idea
 
 A named buyer can wait. Higher-ed giving, federal publishing, and “in-house

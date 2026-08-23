@@ -12,7 +12,7 @@ Types below are *kinds of thing*, not URLs. Questions for writing live in
 |---------|----------|-----|
 | **Mick** | me + AI | orientation, paused, weekly. Not public. |
 | **Playground** | whoever already knows me | drafts, experiments, informal posts. `~/Sites/personal/content` |
-| **Site** | a stranger who might hire, and anyone who should *feel* competence | the public professional surface: space, problem sets, lessons, impression loops. Drafted in `site/`. Built as a real website when a page job is clear enough to try. |
+| **Site** | a stranger who might hire, and anyone who should *feel* competence | the public professional surface: space, problem sets, lessons, impressions. Drafted in `site/`. Built as a real website when a page job is clear enough to try. |
 | **Books** | a reader who will sit for a sequence | one argument, ordered. Drafted in `books/` |
 | **Writebook** | same reader, later | a *publisher* you install on a server. Not a type of writing. See `books/writebook.md` |
 
@@ -42,9 +42,9 @@ fill with résumé bullets to look complete.
 interest in, that can turn into a conversation. Not a generic contact page.
 Not a Jacobian-style policy of what will not be taken. Hear the idea.
 
-**Impression** — evidence of how the Site landed: analytics, play, intended
-submissions. A feedback loop. It is how Problem Sets and Lessons get framed.
-Not a page. Not a vanity metric.
+**Impression** — the start of an interaction. Why someone would click, tap, or
+scroll *this*. Not a log of what they already did. Analytics, play, and
+submissions can come after; they are not the Impression. Not a page.
 
 **Thesis** — how I think about a class of problems. The live one is CMS first
 principles (intent before UI, content over complexity, you still succeed if
@@ -66,14 +66,15 @@ Principles` is a series. Usual precursor to a book. Not automatically a book.
 not an essay and not a service card. It can be interactive.
 
 **Experience** — a way of showing competence that is not a paragraph: space,
-motion, a 3D passage, a story branch, a small tool. First impression lives
-here. If it does not make someone want to stay, the text never gets read.
+motion, a 3D passage, a story branch, a small tool. An Experience can offer
+impressions. If it does not make someone want to stay, the text never gets
+read.
 
 ## Relationships
 
 ```
-Experience  →  first impression (stay or leave)
-Impression  →  which Problem Sets landed
+Impression  →  an interaction starts (why this click)
+Experience  →  competence shown without a paragraph
 Problem Set →  Lesson (learn, then talk)
 Lesson      →  conversation / hire
 Proof       →  can sit inside a Problem Set or a Lesson
@@ -96,8 +97,8 @@ Site that means:
 3. **Problem-shaped** — they can find a mess they have, learn something
    about it, and talk. Proof is checkable when it appears; it is not the
    homepage genre.
-4. **Looped** — impressions change the framing. The Site learns who is
-   interested instead of guessing once.
+4. **Looped** — the Site can change framing from what people actually take
+   up, not a one-shot guess. That looking is not the Impression.
 
 The playground `/work` page is still a negative example: service cards, fake
 projects, fake testimonials, placeholder Calendly. Do not port *that*. Do

@@ -15,7 +15,8 @@ still lead; they do not freeze the build.
 
 - Hire-me through craft: space, problem sets, a lesson that can become a
   conversation
-- A feedback loop (impressions) so framing follows the audience, not a guess
+- Impressions: why someone would act, so the Site is not a wall of text they
+  have to survive
 - Voice: specific and checkable when stating facts; playful when the
   experience needs it
 - A home for linking books when they exist
@@ -48,4 +49,4 @@ link, or rebuild — later choice, per piece.
 The offer is still forming. Résumé title is still “Senior Full Stack
 Engineer.” Consulting is the posture. Next work is Home that makes someone
 stay, Problem Sets that are not a résumé, a Lesson that is not a generic
-form — and an impression loop so we can see what actually interested them.
+form — and impressions a stranger might actually take.

@@ -171,3 +171,5 @@ Do not pretend these replace reading the page.
 - For "the web is already a graph": pages as nodes, links as edges. A
   graph database earns its keep at multi-writer, multi-hop, product-scale
   relationship load — not a personal folder of markdown.
+- How that feels in a chat or a coding agent:
+  [classifier-stack.md](classifier-stack.md).

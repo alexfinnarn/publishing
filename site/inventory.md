@@ -96,7 +96,7 @@ is not the same as a fake “Three.js dashboard” card.
 ## Missing / still forming
 
 - Named **problem sets** (the interesting hole)
-- An impression loop (analytics, play, intended submissions)
+- Impressions a stranger might take (why this click, not a log after it)
 - A **lesson** that teaches from those sets and can become a conversation
 - How interactive Home is on the first ship
 - Permission / comfort level on naming federal work in public detail
