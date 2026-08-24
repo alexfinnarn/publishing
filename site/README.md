@@ -35,6 +35,23 @@ Garden, shipping container, visual novel, home automation are playground
 until they demonstrate a problem set. Then they can graduate. They are not
 banned from the professional surface by genre.
 
+## Serving
+
+Static host only. No application server that renders a new document per request.
+
+A URL is not required to be one HTML file. The app may assemble a view from
+files that already exist on the host. A user action can load another static
+asset: an HTML fragment, JS, CSS, JSON, CSV, or anything else the host will
+serve as a file. An HTML file is not automatically a page.
+
+That is the allowed way a modifier works. Defined states are authored ahead of
+time and shipped as files (or as slots inside files). A click loads or reveals
+a state. It is not a server-built personality, and it is not limited to whatever
+fitted in the first response body.
+
+Default content still has to stand on first request. Extra fragments are for
+states someone asked for.
+
 ## Split from the playground
 
 `~/Sites/personal/content` stays the informal lab (https://alexfinnarn.github.io/).
