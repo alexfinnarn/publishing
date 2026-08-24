@@ -47,6 +47,15 @@ serve as a file. An HTML file is not automatically a page.
 Default content still has to stand on first request. Extra files are for
 states someone asked for.
 
+## Default and opt-in
+
+You cannot force a visitor to play. The first response is the ordinary web:
+readable, complete, a bit boring on purpose. That backup is required.
+
+If they take an Impression — select a box, apply a variant, open a nested
+slot — the Experience can deepen. Better UX is successive, not the landing
+state. No tour before the first click. No locked door if they never click.
+
 ## Component variants
 
 A **variant** is a named rendering of a component: style plus which content is
