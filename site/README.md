@@ -44,13 +44,29 @@ files that already exist on the host. A user action can load another static
 asset: an HTML fragment, JS, CSS, JSON, CSV, or anything else the host will
 serve as a file. An HTML file is not automatically a page.
 
-That is the allowed way a modifier works. Defined states are authored ahead of
-time and shipped as files (or as slots inside files). A click loads or reveals
-a state. It is not a server-built personality, and it is not limited to whatever
-fitted in the first response body.
-
-Default content still has to stand on first request. Extra fragments are for
+Default content still has to stand on first request. Extra files are for
 states someone asked for.
+
+## Component variants
+
+A **variant** is a named rendering of a component: style plus which content is
+included. It is not a user profile and not a site-wide personality.
+
+The same component can appear on the first response and in later files. A click
+asks for another authored file. The client keeps only the node that matches a
+CSS selector and swaps it onto the existing target. HTMX does this with
+`hx-get` + `hx-target` + `hx-select`. Stimulus (or a small controller next to
+Turbo) does the same job: fetch the file, `querySelector` the component, replace
+the target. The response may be a full HTML document; only the selected node
+lands on the page.
+
+That is why variants stay static. Each file is already the component in that
+state — classes, tokens, and the blocks that belong in that reading. The host
+does not compute a new personality. It hands over a file that was written ahead
+of time.
+
+`localStorage` may remember the last variant a browser chose. The URL may name
+it if the reading should be shareable. Neither source invents the markup.
 
 ## Split from the playground
 
