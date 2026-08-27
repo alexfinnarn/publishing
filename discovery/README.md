@@ -4,6 +4,10 @@ Dated prompts and replies used to be the primary record. They are now
 mirrored (and will eventually be superseded) by GitHub issues labeled
 `discovery`.
 
+Discovery is how this project finds its own types, Site decisions, and
+method. It is **not** a queue of articles. A post idea is writing. Use
+label `writing` and see the root `README.md`.
+
 **New process**
 
 1. A discovery question becomes an **issue** (label `discovery`).
@@ -21,6 +25,17 @@ closed and its durable content has landed, the corresponding file can be
 deleted or left as historical only.
 
 Living lists (sites, sources) still live in `references/`, not here.
+
+## What does not belong here
+
+- An Essay, post, or thread you intend to publish.
+- Research that exists only to support a piece (sources can live on the
+  writing issue or later in `references/` if they stay useful).
+- “First article” ideas. Those are `writing`, even when they are the first
+  one.
+
+If a discovery reply produces a claim worth publishing, spawn a **separate**
+`writing` issue. Do not relabel the discovery ticket as the article.
 
 ## How to write the next prompt (issue body)
 
