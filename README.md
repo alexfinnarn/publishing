@@ -21,6 +21,26 @@ loop; do not wait for a finished ontology to build.
 
 Mick (`~/Sites/personal/mick`) stays the private orientation layer.
 
+## Writing vs discovery
+
+These are different jobs. Do not file one as the other.
+
+| | Discovery (`discovery` label) | Writing (`writing` label) |
+|--|------------------------------|---------------------------|
+| Asks | What is true about *this project* — types, Site, method | What claim does a *reader* get |
+| Output | A sentence in ontology, `site/`, `questions.md`, or `references/` | A draft Essay / post, usually on the Playground |
+| Close when | The durable part has landed, or the question is dead | A draft exists, or the piece is dropped |
+| Not | A queue of articles | A way to redesign the Site or the ontology |
+
+First article in the repo is still writing. Research for a piece stays on
+that issue (or in `references/` if the list should live). If discovery
+produces a publishable claim, open a **new** writing issue; do not convert
+the discovery ticket.
+
+A writing issue body should name the claim, the surface (Playground first),
+and what “done” means. Use `questions.md` to take the claim apart. The type
+is **Essay** until a Thesis or Series actually exists.
+
 ## How to work here
 
 1. Change `ontology.md` when a type or relationship is wrong — or too tight.
