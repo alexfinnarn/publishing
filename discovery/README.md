@@ -1,18 +1,17 @@
 # Discovery
 
-Dated prompts and replies used to be the primary record. They are now
-mirrored (and will eventually be superseded) by GitHub issues labeled
-`discovery`.
-
 Discovery is how this project finds its own types, Site decisions, and
 method. It is **not** a queue of articles. A post idea is writing. Use
 label `writing` and see the root `README.md`.
 
-**New process**
+The record is GitHub issues labeled `discovery`. This folder is only the
+method. Numbered notes `01`–`09` were deleted after their issues closed;
+git history still has the files.
+
+**Process**
 
 1. A discovery question becomes an **issue** (label `discovery`).
-2. Write the reply in the issue thread (or keep a short markdown note if
-   preferred while drafting).
+2. Write the reply in the issue thread.
 3. When a durable claim, type, relationship, or Site decision emerges,
    move it into the permanent file (`ontology.md`, `site/`, `questions.md`,
    `references/`, etc.) and reference the issue.
@@ -20,11 +19,10 @@ label `writing` and see the root `README.md`.
    tickets. History lives in the closed issues + the files that absorbed
    the result.
 
-The old numbered files remain for now as source material. Once an issue is
-closed and its durable content has landed, the corresponding file can be
-deleted or left as historical only.
-
 Living lists (sites, sources) still live in `references/`, not here.
+
+Do not recreate a markdown archive of closed discoveries. Do not combine
+old notes into one file.
 
 ## What does not belong here
 
@@ -49,16 +47,17 @@ For an assistant (or for later-you):
 
 The writer can ignore the prompt.
 
-## Existing notes → issues
+## Closed origins
 
-| File | Issue |
-|------|-------|
-| `01-starting-a-publishing-project.md` | #1 |
-| `02-writing-after-the-job.md` | #2 |
-| `03-one-layer-too-many.md` | #3 |
-| `04` + `06` + `07` + `08` (open input / looking / classifiers) | #4 |
-| `05-consultant-sites.md` | #5 |
-| `09-impressions-and-interactions.md` | #6 |
+| Origin | Issue |
+|--------|-------|
+| Starting a publishing project | [#1](https://github.com/alexfinnarn/publishing/issues/1) |
+| Writing after the job | [#2](https://github.com/alexfinnarn/publishing/issues/2) |
+| One layer too many | [#3](https://github.com/alexfinnarn/publishing/issues/3) |
+| Open input / looking / classifiers | [#4](https://github.com/alexfinnarn/publishing/issues/4) |
+| Four consultant sites | [#5](https://github.com/alexfinnarn/publishing/issues/5) |
+| One interaction that counts as an impression | [#6](https://github.com/alexfinnarn/publishing/issues/6) |
+| Classifier stack / proportional provocation / ink | [#7](https://github.com/alexfinnarn/publishing/issues/7) |
 
 Close each issue when the durable part has been extracted or the question
 is no longer live.

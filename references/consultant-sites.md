@@ -1,7 +1,7 @@
 # Consultant sites
 
-Living list. Discovery notes that use this list start at
-[discovery/05-consultant-sites.md](../discovery/05-consultant-sites.md).
+Living list. Visitor reading that used this list is closed in
+[#5](https://github.com/alexfinnarn/publishing/issues/5).
 
 The point is not to make a site like theirs. First pass was to see how they
 turn a systems brain into something a buyer can use. The discovery notes

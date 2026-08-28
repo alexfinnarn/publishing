@@ -18,9 +18,9 @@ do this: take open input (interviews, reviews, competitor pages),
 **classify** it into themes, personas, opportunities, then hand you
 the classes as if looking already happened.
 
-That is the same move as a structured output in
-[discovery/06-you-have-to-look.md](../discovery/06-you-have-to-look.md)
-and [discovery/07-where-a-classifier-belongs.md](../discovery/07-where-a-classifier-belongs.md):
+That is the same move as a structured output in the closed chain
+[#4](https://github.com/alexfinnarn/publishing/issues/4)
+and [#7](https://github.com/alexfinnarn/publishing/issues/7):
 a schema that claims the interesting work is over. Useful when the
 property is reducible (this ticket is billing vs auth). A fake shortcut
 when the property *is* the work.
@@ -106,7 +106,7 @@ is a reducibility bet: decide the job, spend effort, emit done.
 
 ## Completeness is the tell
 
-[discovery/08-too-big-to-look.md](../discovery/08-too-big-to-look.md)
+[#4](https://github.com/alexfinnarn/publishing/issues/4)
 noted the shape: a person given too many jobs stalls; a model given
 the same mix **completes**. Both leave something you cannot use as the
 next step.
@@ -139,7 +139,9 @@ preferences,” or a total procedure that knows whether this turn was
 discovery or delivery.
 
 Hand-written types in `ontology.md` are a classifier you chose, and
-you still look. That is the allowed kind. See discovery 07.
+you still look. That is the allowed kind. See
+[#4](https://github.com/alexfinnarn/publishing/issues/4)
+and [#7](https://github.com/alexfinnarn/publishing/issues/7).
 
 ## When to open which thing
 
@@ -157,9 +159,10 @@ letting the builder’s first guess be the discovery method.
 
 - [three-ideas.md](three-ideas.md) — no total classifier; you cannot
   type the user; looking is the method for idea-work.
-- [discovery/06-you-have-to-look.md](../discovery/06-you-have-to-look.md),
-  [07](../discovery/07-where-a-classifier-belongs.md),
-  [08](../discovery/08-too-big-to-look.md).
+- [#4](https://github.com/alexfinnarn/publishing/issues/4)
+  (open input / looking / classifiers),
+  [#7](https://github.com/alexfinnarn/publishing/issues/7)
+  (proportional provocation / ink).
 - On the model itself: it predicts the next token. Everything that
   looks like “understand the task” is learned continuation plus a
   harness. Karpathy’s talks on autoregression are enough; you do not

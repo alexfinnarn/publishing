@@ -1,9 +1,8 @@
 # Halting, open input, and irreducibility
 
-Background for the claim in
-[discovery/06-you-have-to-look.md](../discovery/06-you-have-to-look.md)
-and the earlier question in
-[discovery/04-input-problem.md](../discovery/04-input-problem.md).
+Background for the closed chain in
+[#4](https://github.com/alexfinnarn/publishing/issues/4)
+(open input, looking, classifiers, request size).
 
 These are three different results. They rhyme. They do not prove each
 other. The discovery notes borrow their *shape*. They do not apply the

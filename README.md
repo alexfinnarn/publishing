@@ -14,7 +14,7 @@ loop; do not wait for a finished ontology to build.
 |------|------|
 | `ontology.md` | What kinds of things exist, and how they relate |
 | `questions.md` | Questions for a piece, tagged with the field they belong to |
-| `discovery/` | Dated prompts and replies. How to write the next one: `discovery/README.md`. Not public. |
+| `discovery/` | How to write the next discovery issue. History is closed GitHub issues, not files here. Not public. |
 | `references/` | Living lists (sites, sources) that discovery notes can point at |
 | `site/` | Consulting website — claims, pages, inventory, and later the app |
 | `books/` | Long-form manuscripts and Writebook notes (not the cloned app) |
@@ -40,6 +40,24 @@ the discovery ticket.
 A writing issue body should name the claim, the surface (Playground first),
 and what “done” means. Use `questions.md` to take the claim apart. The type
 is **Essay** until a Thesis or Series actually exists.
+
+## Filing
+
+Issues are the working record. Close them. GitHub Discussions are off: a
+writing idea is a `writing` issue, not a discussion and not a second queue.
+
+Use only these labels:
+
+| Label | Meaning |
+|-------|---------|
+| `discovery` | What is true about this project |
+| `writing` | A piece for a reader |
+| `site` | Consulting Site surface |
+| `ontology` | Types, surfaces, relationships |
+| `durable` | A sentence must land in `ontology.md`, `site/`, `questions.md`, or `references/`. Do not put this on writing; the draft is the landing. |
+
+Never both `discovery` and `writing`. GitHub issue types (Task, Bug, Feature)
+stay blank unless there is something to build or something broken.
 
 ## How to work here
 
