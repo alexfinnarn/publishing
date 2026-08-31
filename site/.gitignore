@@ -1,3 +1,5 @@
 node_modules/
-package-lock.json
-.build-manifest.json
+dist/
+.astro/
+test-results/
+playwright-report/

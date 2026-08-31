@@ -1,0 +1,16 @@
+---
+import { THEME_PREFIX } from '../lib/site';
+
+/** Content writes ordinary root-absolute links (`/problems.html`). MDX maps
+ *  both markdown links and literal <a> elements through here, so a reader
+ *  stays inside whichever theme copy they are reading. The base is derived
+ *  from the URL being rendered, which keeps this component self-contained. */
+const { href, ...rest } = Astro.props;
+const m = Astro.url.pathname.match(new RegExp(`^/${THEME_PREFIX}/([^/]+)/`));
+const base = m ? `/${THEME_PREFIX}/${m[1]}` : '';
+const out =
+  typeof href === 'string' && href.startsWith('/') && !href.startsWith('//')
+    ? base + href
+    : href;
+---
+<a href={out} {...rest}><slot /></a>

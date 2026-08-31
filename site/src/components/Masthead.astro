@@ -1,0 +1,20 @@
+---
+import { NAV } from '../lib/site';
+interface Props { base: string; nav: string }
+const { base, nav } = Astro.props;
+---
+<header class="masthead grid">
+  <div class="inner">
+    <a class="wordmark" href={`${base}/`}>Alex Finnarn</a>
+    <nav aria-label="Primary">
+      <ul>
+        {NAV.map(item => (
+          <li>
+            <a href={`${base}${item.href}`}
+               aria-current={nav === item.key ? 'page' : undefined}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
