@@ -88,6 +88,7 @@ Examples this project has already seen:
 | Name one interaction | Kitchen-sink prompt | Eight clusters of questions |
 | Impression as the start of a click | Feedback loop / analytics type | Ontology that put evidence after the fact first |
 | Colleague chat in a repo of notes | Software task in a workspace | File edits and a closed loop |
+| Dream a better experience on top of a boring default | Enforce the notes as doctrine | Constraints, focus lectures, a smaller task |
 
 Once that guess is in, reasoning is loyal to it. “Think harder” does
 not reopen *whether this is a spec*. It writes a better spec review.
@@ -138,8 +139,10 @@ a daily competitor agent, a second notes graph, “apply my
 preferences,” or a total procedure that knows whether this turn was
 discovery or delivery.
 
-Hand-written types in `ontology.md` are a classifier you chose, and
-you still look. That is the allowed kind. See
+A vocabulary you wrote by hand is a classifier you chose, and you
+still look. That is the allowed kind — though this repo tried it and
+the types outran the instances; see the audit note at the top of
+`README.md`. See
 [#4](https://github.com/alexfinnarn/publishing/issues/4)
 and [#7](https://github.com/alexfinnarn/publishing/issues/7).
 
@@ -150,7 +153,7 @@ and [#7](https://github.com/alexfinnarn/publishing/issues/7).
 | Next sentence, first principles, history of a convention | Plain chat. Instruction: follow the last reply, one fork, do not close. |
 | “What did I already claim?” | Something that only talks to these files (NotebookLM or a paste). |
 | Gather (how did the magazine layout stick) | A research pass, then you write under it. |
-| Assemble HTML, try Home, ship a fragment | Grok Build or any coding agent. Now the engineering classifier is the point. |
+| Assemble HTML, try Home, ship a fragment | Grok Build or any coding agent. Now the engineering classifier is the point. Conventional pages: [#11](https://github.com/alexfinnarn/publishing/issues/11). Play on those pages: [#8](https://github.com/alexfinnarn/publishing/issues/8). |
 
 You can keep the repo as the record in all of these. The mistake is
 letting the builder’s first guess be the discovery method.

@@ -1,8 +1,6 @@
 # Inventory
 
-What exists vs what was invented. Use this when making pages so the Site does
-not start from a blank services grid — and so it does not refuse real craft
-because it lived on the playground first.
+What is real. Build pages from this file — everything here is checkable.
 
 ## Proof (real)
 
@@ -56,14 +54,13 @@ These live in `~/Sites/personal/content/src/content/writing/`.
 - `005` Exploring DAG Tooling
 - `007` How Not To AI: Auto-generated Text
 
-Any of these can feed a problem set or a lesson. They should not be the first
-impression of the Site.
+9 of the 14 are tagged `AI` — including three of the four CMS ones. The
+corpus is more about AI than the folder names suggest.
 
 ## Craft that can graduate
 
-Playground work that already shows what a web developer can do. Not résumé
-filler. Not automatically on Home. Available when a problem set or Home
-needs a real interactive example:
+Playground work that already shows what a web developer can do. Real, and
+available whenever a page wants a live example:
 
 - ink / choose-your-own-adventure personal site
 - Three.js shipping-container piece
@@ -90,15 +87,19 @@ The playground `/work` page (`src/pages/work.astro`) is a template:
 - Placeholder email, LinkedIn, Calendly
 - “Available February 2025”
 
-That page is a negative example of the ontology. A real Three.js experience
-is not the same as a fake “Three.js dashboard” card.
+None of that gets ported. A real Three.js piece is not the same thing as a
+fake “Three.js dashboard” card. (An availability line itself is fine — it
+was the invented date that was the problem.)
 
-## Missing / still forming
+## Still missing
 
-- Named **problem sets** (the interesting hole)
-- Impressions a stranger might take (why this click, not a log after it)
-- A **lesson** that teaches from those sets and can become a conversation
-- How interactive Home is on the first ship
-- Permission / comfort level on naming federal work in public detail
+- The pages themselves ([#11](https://github.com/alexfinnarn/publishing/issues/11))
+- A working offer sentence for Home. Résumé title is still “Senior Full
+  Stack Engineer.”
+- Domain and host
+- Photos
 - Real quotes, if any ever exist — none until they do
-- Domain, photos, the actual contact path inside Lesson
+
+Decided in [#11](https://github.com/alexfinnarn/publishing/issues/11):
+federal work gets named short for v1 (CivicActions, VA and CMS, no program
+detail). Contact is a real mailto.

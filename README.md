@@ -1,77 +1,59 @@
 # Publishing
 
-Workspace for a **consulting site** worth seeing and any **book-shaped**
-writing that comes out of the same work.
+My professional surface: a **consulting site** worth seeing, the **writing**
+that comes out of the same work, and any **book** that writing turns into.
+
+What it is for, in order:
+
+1. Get me publishing again. Last piece went out 2025-07-27.
+2. Be a web presence a stranger can read fast — if I get laid off, this is
+   what I point at.
+3. Make the case that I am a consultant, not between jobs.
+4. Stay at the front of where the work is actually going.
 
 The personal playground stays at `~/Sites/personal/content`
-(https://alexfinnarn.github.io/). This directory is the professional surface:
-notes first, then a real site when a page job is ready to try. AI is in the
-loop; do not wait for a finished ontology to build.
+(https://alexfinnarn.github.io/). Mick (`~/Sites/personal/mick`) stays the
+private orientation layer. Neither is this.
+
+## This markdown is a working draft
+
+My direction in conversation outranks every file in this repo. Much of this
+prose was written by a model from my prompts — it is a first draft, not my
+settled position, and it has no authority over me.
+
+Trying something new, changing my mind, throwing away working code, or
+replacing the vocabulary is the method, not a failure mode. Do not quote a
+file back at me as a reason not to try something. If a doc conflicts with
+what I want now, the doc is wrong — change the doc.
+
+Words that mean something specific here: none yet. Essay, work, page, site
+are ordinary English until something actually forces a distinction.
 
 ## Layout
 
 | Path | Role |
 |------|------|
-| `ontology.md` | What kinds of things exist, and how they relate |
-| `questions.md` | Questions for a piece, tagged with the field they belong to |
-| `discovery/` | How to write the next discovery issue. History is closed GitHub issues, not files here. Not public. |
-| `references/` | Living lists (sites, sources) that discovery notes can point at |
-| `site/` | Consulting website — claims, pages, inventory, and later the app |
-| `books/` | Long-form manuscripts and Writebook notes (not the cloned app) |
+| `inventory.md` | What is real — employers, dates, outcomes, and what is fake on the playground |
+| `site/` | The consulting website. Code, plus a short note on the two serving rules |
+| `writing/` | Drafts. Long-form thinking that has not been published yet |
+| `references/` | Lists and pointers that came from somewhere else |
+| `books/` | Empty until an outline has an order someone would read |
 
-Mick (`~/Sites/personal/mick`) stays the private orientation layer.
+## Working record
 
-## Writing vs discovery
+GitHub issues, not files here. The issues carry more than these docs do —
+[#11](https://github.com/alexfinnarn/publishing/issues/11) is the full build
+brief for the site, [#9](https://github.com/alexfinnarn/publishing/issues/9)
+is a researched essay waiting to be written.
 
-These are different jobs. Do not file one as the other.
+Labels: `site`, `writing`, `discovery`. Nothing else. An issue can carry two
+if it genuinely is two.
 
-| | Discovery (`discovery` label) | Writing (`writing` label) |
-|--|------------------------------|---------------------------|
-| Asks | What is true about *this project* — types, Site, method | What claim does a *reader* get |
-| Output | A sentence in ontology, `site/`, `questions.md`, or `references/` | A draft Essay / post, usually on the Playground |
-| Close when | The durable part has landed, or the question is dead | A draft exists, or the piece is dropped |
-| Not | A queue of articles | A way to redesign the Site or the ontology |
-
-First article in the repo is still writing. Research for a piece stays on
-that issue (or in `references/` if the list should live). If discovery
-produces a publishable claim, open a **new** writing issue; do not convert
-the discovery ticket.
-
-A writing issue body should name the claim, the surface (Playground first),
-and what “done” means. Use `questions.md` to take the claim apart. The type
-is **Essay** until a Thesis or Series actually exists.
-
-## Filing
-
-Issues are the working record. Close them. GitHub Discussions are off: a
-writing idea is a `writing` issue, not a discussion and not a second queue.
-
-Use only these labels:
-
-| Label | Meaning |
-|-------|---------|
-| `discovery` | What is true about this project |
-| `writing` | A piece for a reader |
-| `site` | Consulting Site surface |
-| `ontology` | Types, surfaces, relationships |
-| `durable` | A sentence must land in `ontology.md`, `site/`, `questions.md`, or `references/`. Do not put this on writing; the draft is the landing. |
-
-Never both `discovery` and `writing`. GitHub issue types (Task, Bug, Feature)
-stay blank unless there is something to build or something broken.
-
-## How to work here
-
-1. Change `ontology.md` when a type or relationship is wrong — or too tight.
-2. Use `questions.md` when writing or taking a topic apart. Do not turn a
-   question into a type.
-3. Change `site/` when the public surface changes. Page jobs live in
-   `site/pages.md`.
-4. Change `books/` when a thesis is ready to be sequential.
-5. Build in this folder (or a sibling) when Home, a problem set, or a lesson
-   is clear enough to feel. Do not clone Writebook again; the app already
-   lives at `~/Sites/personal/writebook`.
-
-Discovery still wants the next true sentence. It does not have to finish
-before the Site can move. High reasoning is for taking a claim apart
-(`questions.md`) or choosing an offer — not for inventing constraints the
-work did not ask for.
+Closed background: [#1](https://github.com/alexfinnarn/publishing/issues/1)
+starting up, [#2](https://github.com/alexfinnarn/publishing/issues/2) writing
+after the job, [#3](https://github.com/alexfinnarn/publishing/issues/3) one
+layer too many, [#4](https://github.com/alexfinnarn/publishing/issues/4) open
+input and classifiers, [#5](https://github.com/alexfinnarn/publishing/issues/5)
+four consultant sites, [#6](https://github.com/alexfinnarn/publishing/issues/6)
+one interaction, [#7](https://github.com/alexfinnarn/publishing/issues/7)
+classifier stack and ink.

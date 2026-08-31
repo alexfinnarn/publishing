@@ -1,0 +1,55 @@
+/* federal — the register of government digital services */
+:root {
+  color-scheme: light;
+  --navy: #1b2b50; --navy-deep: #12203c; --fed-red: #b4292f;
+
+  --ink: #17181b; --ink-soft: #4a4f57;
+  --paper: #fff; --paper-warm: #f0f3f8;
+  --rule: #c9d2e0; --accent: var(--navy); --accent-dim: #e2e9f5;
+
+  --font-body: var(--font-sans);
+  --font-display: var(--font-sans);
+
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  --headline-measure: 20ch;
+  --measure: 62ch;
+  --breakout: 10rem;
+
+  --step-0: clamp(1.0625rem, 1rem + .25vw, 1.1875rem);
+  --step-1: clamp(1.2rem, 1.1rem + .5vw, 1.5rem);
+  --step-2: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --step-3: clamp(2rem, 1.6rem + 2vw, 3.1rem);
+}
+
+body { line-height: 1.65; }
+
+.masthead { background: var(--navy); border-block-end: 4px solid var(--fed-red); }
+.masthead .wordmark { color: #fff; }
+.masthead .wordmark:hover { color: var(--paper-warm); }
+.masthead nav a { color: #c8d3e6; }
+.masthead nav a:hover { color: #fff; border-color: #6b7d9e; }
+.masthead nav a[aria-current="page"] { color: #fff; border-color: var(--fed-red); }
+
+.kicker { color: var(--fed-red); font-weight: 700; }
+
+h1 { color: var(--navy-deep); letter-spacing: -.015em; }
+h2 {
+  color: var(--navy-deep);
+  border-block-start: 1px solid var(--rule); padding-block-start: var(--size-4);
+}
+
+main a { text-decoration-thickness: 2px; text-underline-offset: 2px; font-weight: 600; }
+
+.case-meta {
+  background: var(--paper-warm); border-block: 0;
+  border-inline-start: 6px solid var(--navy);
+  padding: var(--size-5); border-radius: var(--radius-2);
+}
+.case-meta .k { color: var(--navy); font-weight: 700; }
+
+.callout {
+  background: var(--paper-warm); border-inline-start: 5px solid var(--fed-red);
+}
+.callout .eyebrow { color: var(--fed-red); }
+
+.colophon { border-block-start: 4px solid var(--navy); }

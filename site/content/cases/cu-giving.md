@@ -1,0 +1,60 @@
+---
+theme: buff
+nav: problems
+kicker: "Case study · University of Colorado · 2020–2022"
+title: "Splitting a giving platform from its CMS"
+dek: "Roughly $5.4 million a year moved through this system. It shared a codebase with the marketing site. That meant a content deploy and a donations outage were the same event waiting to happen."
+head_title: "Splitting a giving platform from its CMS — Alex Finnarn"
+description: "A domain-driven migration so a content problem stopped being a donations outage."
+---
+
+<!-- Built only from inventory.md.
+     TO DEEPEN: what actually forced the split (an outage? an audit? a
+     compliance requirement?), how long the migration ran, what the bounded
+     contexts ended up being, what you would do differently.
+     No invented metrics. -->
+
+<div class="case-meta">
+  <div><span class="k">Scale</span> ~$5.4M processed annually</div>
+  <div><span class="k">Approach</span> Domain-driven design</div>
+  <div><span class="k">Method</span> Kanban · Theory of Constraints</div>
+</div>
+
+## The situation
+
+University giving is seasonal and unforgiving. A meaningful share of the
+year's total arrives in a few days in December, and during those days the
+system cannot be down, cannot be slow, and cannot drop a transaction it has
+already acknowledged.
+
+It was also, structurally, a content management system. Campaign pages,
+designation copy, appeal landing pages — all things marketing needed to change
+quickly. Two workloads with completely different risk profiles, sharing a
+deployment.
+
+## What I did
+
+Led the migration that separated the two, using domain-driven design to find
+the boundary. The useful question was not "how do we split this codebase" but
+"what are the actual domains here, and which one owns a donation once it
+exists." Once that was answered the technical split followed from it.
+
+The result: a content problem stops being a payments problem. Marketing can
+ship a campaign page without anyone reviewing it for transactional risk.
+
+<div class="callout">
+<p class="eyebrow">The part that was not code</p>
+<p>We ran this with Kanban and Theory of Constraints — because the bottleneck was rarely engineering capacity, it was decisions waiting on people. And I wrote Architectural Decision Records throughout, so the reasoning would survive me leaving. It did.</p>
+</div>
+
+## What I took from it
+
+Most "we need to rewrite the CMS" conversations are actually a boundary
+problem in disguise. Two things that should never have shared a database are
+sharing one, and every symptom traces back to that. Finding the seam is
+cheaper than the rewrite and it is almost always available.
+
+<div class="next-prev">
+  <a href="{{HOME}}problems.html#migration">← Migrations that cannot lose content or money</a>
+  <a href="{{HOME}}cases/cu-tooling.html">Next case study →</a>
+</div>

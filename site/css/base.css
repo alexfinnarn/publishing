@@ -1,0 +1,228 @@
+/* base.css — structure only. Theme-independent.
+ *
+ * Every theme MUST define these tokens:
+ *   --ink --ink-soft --paper --paper-warm --rule --accent --accent-dim
+ *   --font-body --font-display
+ *   --measure --breakout --gutter --headline-measure
+ *   --step-0 --step-1 --step-2 --step-3
+ * Everything below consumes them. A theme adds character on top. */
+
+html { background: var(--paper); }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: var(--font-lineheight-3);
+  margin: 0;
+}
+
+/* ---------- the grid: full | wide | text, all centered ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--gutter), 1fr)
+    [wide-start] minmax(0, var(--breakout))
+    [text-start] min(100% - (var(--gutter) * 2), var(--measure)) [text-end]
+    minmax(0, var(--breakout)) [wide-end]
+    minmax(var(--gutter), 1fr) [full-end];
+}
+.grid > *     { grid-column: text; }
+.grid > .wide { grid-column: wide; }
+.grid > .full { grid-column: full; }
+
+/* ---------- accessibility ---------- */
+
+.skip {
+  position: absolute; inset-inline-start: -100vw; inset-block-start: 0;
+  background: var(--ink); color: var(--paper);
+  padding: var(--size-2) var(--size-3); z-index: 10;
+}
+.skip:focus { inset-inline-start: 0; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- chrome ---------- */
+
+.masthead { border-block-end: 1px solid var(--rule); }
+.masthead > .inner {
+  grid-column: wide;
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  justify-content: space-between; gap: var(--size-3);
+  padding-block: var(--size-5) var(--size-4);
+}
+.wordmark {
+  font-family: var(--font-display);
+  font-size: var(--step-1); font-weight: var(--font-weight-7);
+  color: var(--ink); text-decoration: none;
+}
+.wordmark:hover { color: var(--accent); }
+.masthead nav ul { display: flex; flex-wrap: wrap; gap: var(--size-4); list-style: none; margin: 0; padding: 0; }
+.masthead nav a {
+  color: var(--ink-soft); text-decoration: none;
+  border-block-end: 2px solid transparent; padding-block-end: 2px;
+}
+.masthead nav a:hover { color: var(--ink); border-color: var(--rule); }
+.masthead nav a[aria-current="page"] { color: var(--ink); border-color: var(--accent); }
+
+.colophon { border-block-start: 1px solid var(--rule); margin-block-start: var(--size-8); }
+.colophon > .inner {
+  grid-column: wide; padding-block: var(--size-6) var(--size-8);
+  color: var(--ink-soft); font-size: var(--font-size-1);
+  display: flex; flex-wrap: wrap; gap: var(--size-3) var(--size-7);
+  justify-content: space-between;
+}
+.colophon a { color: var(--ink-soft); }
+.colophon a:hover { color: var(--accent); }
+.colophon ul { display: flex; flex-wrap: wrap; gap: var(--size-4); list-style: none; margin: 0; padding: 0; }
+
+/* ---------- type ---------- */
+
+main { padding-block: clamp(var(--size-7), 6vw, var(--size-9)) var(--size-9); }
+
+/* Open Props' normalize caps headings at ~25ch, which fights the grid.
+   Headings fill their grid cell; --headline-measure narrows h1 if a theme
+   wants that. */
+h1, h2, h3 {
+  font-family: var(--font-display); line-height: var(--font-lineheight-1);
+  text-wrap: balance; max-inline-size: 100%;
+}
+h1 { font-size: var(--step-3); margin-block: 0 var(--size-4); max-inline-size: var(--headline-measure, 100%); }
+h2 { font-size: var(--step-2); margin-block: var(--size-8) var(--size-4); }
+h3 { font-size: var(--step-1); margin-block: 0 var(--size-2); }
+p  { margin-block: 0 var(--size-4); }
+
+.lede {
+  font-size: var(--step-1); line-height: var(--font-lineheight-2);
+  color: var(--ink-soft); margin-block-end: var(--size-7); text-wrap: pretty;
+}
+.kicker, .eyebrow {
+  font-size: var(--font-size-0); letter-spacing: var(--font-letterspacing-2);
+  text-transform: uppercase; color: var(--ink-soft); margin-block-end: var(--size-2);
+}
+
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--ink); }
+
+main > ul, main > ol { margin-block: 0 var(--size-5); padding-inline-start: var(--size-5); }
+main > ul li, main > ol li { margin-block-end: var(--size-2); }
+
+.more { display: inline-block; font-weight: var(--font-weight-6); }
+a.email { font-size: var(--step-1); font-weight: var(--font-weight-6); }
+
+/* ---------- components ---------- */
+
+.problems {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(26rem, 100%), 1fr));
+  gap: var(--size-5); margin-block: var(--size-5) var(--size-6);
+  list-style: none; padding: 0;
+}
+.problem {
+  display: grid; grid-row: span 4; grid-template-rows: subgrid; gap: var(--size-2);
+  container-type: inline-size;
+  background: var(--paper-warm); border: 1px solid var(--rule);
+  border-radius: var(--radius-3); padding: var(--size-5);
+  transition: border-color .15s, background .15s;
+}
+.problem:hover { border-color: var(--accent); background: var(--paper); }
+.problem h3 { margin: 0; }
+.problem p  { margin: 0; color: var(--ink-soft); }
+.problem .evidence { font-size: var(--font-size-0); color: var(--ink-soft); align-self: end; }
+.problem .go { align-self: end; font-weight: var(--font-weight-6); }
+@container (min-width: 22rem) { .problem { padding: var(--size-6); } }
+
+.problem-block { border-block-start: 2px solid var(--ink); padding-block: var(--size-6) var(--size-7); }
+.problem-block h2 { margin-block-start: 0; }
+.problem-block ul { padding-inline-start: var(--size-5); margin-block: 0 var(--size-4); }
+.problem-block ul li { margin-block-end: var(--size-2); }
+
+.cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--size-4); margin-block-start: var(--size-5); list-style: none; padding: 0; }
+.case-link {
+  display: block; padding: var(--size-4); border: 1px solid var(--rule);
+  border-radius: var(--radius-2); text-decoration: none; background: var(--paper-warm);
+}
+.case-link:hover { border-color: var(--accent); background: var(--accent-dim); }
+.case-link strong { display: block; color: var(--ink); margin-block-end: var(--size-1); }
+.case-link span { font-size: var(--font-size-0); color: var(--ink-soft); }
+
+.history { list-style: none; padding: 0; margin: 0; }
+.history li {
+  display: grid; grid-template-columns: 9rem 1fr; gap: var(--size-2) var(--size-4);
+  padding-block: var(--size-3); border-block-start: 1px solid var(--rule);
+}
+.history li:last-child { border-block-end: 1px solid var(--rule); }
+.history .when { font-size: var(--font-size-0); color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.history .what strong { display: block; }
+.history .what span { color: var(--ink-soft); font-size: var(--font-size-1); }
+
+.posts { list-style: none; margin: 0 0 var(--size-5); padding: 0; }
+.posts li {
+  display: grid; grid-template-columns: 7rem 1fr; gap: var(--size-1) var(--size-4);
+  align-items: baseline; padding-block: var(--size-3); border-block-start: 1px solid var(--rule);
+}
+.posts li:last-child { border-block-end: 1px solid var(--rule); }
+.posts time { font-size: var(--font-size-0); color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+
+.case-meta {
+  display: flex; flex-wrap: wrap; gap: var(--size-2) var(--size-5);
+  padding-block: var(--size-4); border-block: 1px solid var(--rule);
+  margin-block-end: var(--size-7); font-size: var(--font-size-1);
+}
+.case-meta div { display: grid; gap: 2px; }
+.case-meta .k {
+  font-size: var(--font-size-0); text-transform: uppercase;
+  letter-spacing: var(--font-letterspacing-2); color: var(--ink-soft);
+}
+
+.callout {
+  background: var(--paper-warm); border-inline-start: 3px solid var(--accent);
+  border-radius: 0 var(--radius-2) var(--radius-2) 0;
+  padding: var(--size-5); margin-block: var(--size-5) var(--size-6);
+}
+.callout p:last-child { margin-block-end: 0; }
+.callout .eyebrow { color: var(--accent); }
+
+.next-prev {
+  display: flex; flex-wrap: wrap; gap: var(--size-4); justify-content: space-between;
+  border-block-start: 1px solid var(--rule); padding-block-start: var(--size-5);
+  margin-block-start: var(--size-8);
+}
+
+@media (width < 34rem) {
+  .history li, .posts li { grid-template-columns: 1fr; }
+}
+
+/* ---------- theme switcher ---------- */
+
+.themes { border-block-start: 1px solid var(--rule); }
+.themes > .inner {
+  grid-column: wide;
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: var(--size-2) var(--size-4);
+  padding-block: var(--size-4) var(--size-7);
+  font-size: var(--font-size-0);
+}
+.themes-label {
+  text-transform: uppercase; letter-spacing: var(--font-letterspacing-2);
+  color: var(--ink-soft);
+}
+.themes ul { display: flex; flex-wrap: wrap; gap: var(--size-2); list-style: none; margin: 0; padding: 0; }
+.themes a {
+  display: inline-block; padding: var(--size-1) var(--size-3);
+  border: 1px solid var(--rule); border-radius: var(--radius-round);
+  text-decoration: none; color: var(--ink-soft);
+}
+.themes a:hover { border-color: var(--accent); color: var(--accent); }
+.themes a[aria-current="true"] {
+  background: var(--ink); border-color: var(--ink); color: var(--paper);
+}

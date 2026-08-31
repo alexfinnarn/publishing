@@ -1,94 +1,100 @@
-# Consulting site
+# Site
 
-Public professional surface. A stranger might hire. They hire competence, which
-here means **direct and innovative**, not a brochure.
+The consulting website. Content is markdown; presentation is themes.
 
-This should be a website worth pointing at — the example, not a quieter copy
-of Autogram / Lullabot / a help policy. Show what you can do. Walls of text
-are the anti-pattern we already felt.
+```bash
+node build.mjs        # writes 45 static HTML files
+npx serve -l 4321 .
+```
 
-Pages are jobs in `pages.md`. What we actually have is in `inventory.md`.
-Code can live here (or a sibling app) when a job is clear enough to try. Notes
-still lead; they do not freeze the build.
+## How it is put together
 
-## This is
+| Path | What it is |
+|------|------------|
+| `content/**.md` | The pages. Theme-agnostic. Frontmatter + markdown (raw HTML blocks allowed) |
+| `themes/<name>/` | `theme.css` (tokens + character), `theme.json` (design and language targets), optional `head.html` / `foot.html` chrome overrides |
+| `css/base.css` | Structure only. The grid, chrome, components, accessibility. Consumes theme tokens, defines no colors |
+| `parts/` | Default chrome, used by any theme that does not override it |
+| `build.mjs` | Markdown × themes → HTML. Nothing runs at request time |
 
-- Hire-me through craft: space, problem sets, a lesson that can become a
-  conversation
-- Impressions: why someone would act, so the Site is not a wall of text they
-  have to survive
-- Voice: specific and checkable when stating facts; playful when the
-  experience needs it
-- A home for linking books when they exist
-- Allowed to use ink, Three.js, story, easter eggs, AI — if they show
-  competence and teach something
+## Two output shapes
 
-## This is not
+- **`/<page>.html`** — the curated site. Each page in the theme its
+  frontmatter names: Home is `broadsheet`, the CU case studies are `buff`,
+  the VA one is `federal`, everything else `paper`. This is what a stranger
+  gets.
+- **`/t/<theme>/<page>.html`** — the whole site in one theme, for every
+  theme. The `t/` namespace keeps theme directories off the site root, where
+  `paper/` and `buff/` would read like pages. Change it with `THEME_PREFIX`
+  at the top of `build.mjs` or as an environment variable:
 
-- Fake clients, fake metrics, placeholder headshots, invented testimonials
-- A Jacobian-style door that lists what I will not do
-- A services grid of synonyms for “I write code”
-- A second Mick / personal-ops system
-- Trojan Tech or any convening play
+  ```bash
+  THEME_PREFIX=preview node build.mjs   # -> /preview/<theme>/
+  THEME_PREFIX= node build.mjs          # -> /<theme>/ at the root
+  ```
 
-Garden, shipping container, visual novel, home automation are playground
-until they demonstrate a problem set. Then they can graduate. They are not
-banned from the professional surface by genre.
+  The build records what it wrote in `.build-manifest.json` (gitignored) and
+  clears exactly that on the next run, so changing the prefix moves the
+  output rather than leaving the old directories orphaned.
 
-## Serving
+Because each theme holds a complete copy at its own depth, ordinary relative
+links stay inside the current theme with no rewriting. The switcher in the
+footer is the only thing that needs computed paths.
 
-Static host only. No application server that renders a new document per request.
+Variables available in chrome and in content:
 
-A URL is not required to be one HTML file. The app may assemble a view from
-files that already exist on the host. A user action can load another static
-asset: an HTML fragment, JS, CSS, JSON, CSV, or anything else the host will
-serve as a file. An HTML file is not automatically a page.
+| Variable | What it is |
+|----------|------------|
+| `{{HOME}}` | Root of the current theme. Use it for every internal link |
+| `{{ROOT}}` | Root of the site. Assets, and hopping between themes |
+| `{{PAGE}}` | Page slug (`index`, `cases-cu-giving`). Emitted as `data-page` on `<html>` so a theme can style one page specially |
+| `{{BUILD_DATE}}` | Date of the build, for a dateline |
 
-Default content still has to stand on first request. Extra files are for
-states someone asked for.
+Substitution happens *before* markdown parsing — `marked` percent-encodes
+braces inside `[text](...)` link syntax, so `{{HOME}}` in a markdown link
+would otherwise break while surviving in raw HTML blocks.
 
-## Default and opt-in
+`[data-page]` is how `broadsheet` turns Home into a real front page — an
+outsized headline beside its dek, then four ruled columns, all above the
+fold on a wide display. That is CSS Grid placement only; the markup is
+identical to every other theme, and DOM order is untouched so focus order
+still follows reading order.
 
-You cannot force a visitor to play. The first response is the ordinary web:
-readable, complete, a bit boring on purpose. That backup is required.
+## Adding a theme
 
-If they take an Impression — select a box, apply a variant, open a nested
-slot — the Experience can deepen. Better UX is successive, not the landing
-state. No tour before the first click. No locked door if they never click.
+Create `themes/<name>/theme.css` defining every token listed at the top of
+`css/base.css`, plus `theme.json`. `--headline-measure` is worth knowing
+about: Open Props' normalize caps headings at ~25ch, which fights the grid,
+so `base.css` frees them and that token narrows `h1` again where a theme
+wants it (`100%` on broadsheet, ~20ch on the rest). Override `head.html` / `foot.html` only if
+the chrome itself has to change shape — `broadsheet` does, for a centred
+masthead and a dateline. Then rebuild; it is picked up automatically and
+appears in every switcher.
 
-## Component variants
+`theme.json` carries a **design target** and a **language target** in prose.
+That file is written to be read by a person or a model authoring the next
+page or the next theme — it is the brief, not configuration.
 
-A **variant** is a named rendering of a component: style plus which content is
-included. It is not a user profile and not a site-wide personality.
+## Rules that are actually rules
 
-The same component can appear on the first response and in later files. A click
-asks for another authored file. The client keeps only the node that matches a
-CSS selector and swaps it onto the existing target. HTMX does this with
-`hx-get` + `hx-target` + `hx-select`. Stimulus (or a small controller next to
-Turbo) does the same job: fetch the file, `querySelector` the component, replace
-the target. The response may be a full HTML document; only the selected node
-lands on the page.
+**Static host.** No application server rendering a document per request. A
+URL is not required to be one HTML file — a click may load another file that
+already exists on the host. The host never invents a file at request time.
 
-That is why variants stay static. Each file is already the component in that
-state — classes, tokens, and the blocks that belong in that reading. The host
-does not compute a new personality. It hands over a file that was written ahead
-of time.
+**The default stands with JS off.** There is currently no JavaScript on the
+site at all, the theme switcher included. Interactivity layers on later,
+opted into per element.
 
-`localStorage` may remember the last variant a browser chose. The URL may name
-it if the reading should be shareable. Neither source invents the markup.
+**Do not invent proof.** No fake clients, metrics, headshots, testimonials,
+or a contact path that goes nowhere. Case studies in `content/cases/` are
+built only from facts in `../inventory.md`; each one opens with a comment
+naming what would deepen it. Do not add a metric you cannot source.
 
-## Split from the playground
+Everything else — how playful, which themes, what the offer sentence says —
+is taste, and taste changes when we look at the thing.
 
-`~/Sites/personal/content` stays the informal lab (https://alexfinnarn.github.io/).
-It already has real essays and a `/work` page that reads like a template. Do
-not “fix” `/work` in place as the consulting site.
+## Next
 
-Graduate work onto this Site when it is good enough for a stranger. Copy,
-link, or rebuild — later choice, per piece.
-
-## Open on purpose
-
-The offer is still forming. Résumé title is still “Senior Full Stack
-Engineer.” Consulting is the posture. Next work is Home that makes someone
-stay, Problem Sets that are not a résumé, a Lesson that is not a generic
-form — and impressions a stranger might actually take.
+[#8](https://github.com/alexfinnarn/publishing/issues/8) puts one touchable
+box on these pages. [#10](https://github.com/alexfinnarn/publishing/issues/10)
+is after that. Neither blocks shipping.

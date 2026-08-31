@@ -1,100 +1,103 @@
 # Consultant sites
 
-Living list. Visitor reading that used this list is closed in
-[#5](https://github.com/alexfinnarn/publishing/issues/5).
+Four sites, visited 2026-08-18. My words, not a summary of them. A polite
+paraphrase of this got written once and it was worse than the original, so
+the original stays.
 
-The point is not to make a site like theirs. First pass was to see how they
-turn a systems brain into something a buyer can use. The discovery notes
-already answered that as a visitor: first impression, then stay or leave.
-That reading stands. These four are a **contrast**, not a ceiling.
+The useful questions after a visit: did I want to stay, could I see a
+problem of mine, was there a next step that was not a generic form. Also
+notice whether they lead with the stack, the critique, the outcome, or
+nothing you can feel.
 
-The Site we want is the best example of a web consultant’s site we can
-actually ship — direct, innovative, a thing you want to stay inside — not a
-quieter wall of text with a better sentence.
+Four was enough. Add a fifth only when one of these stops teaching.
 
-## How to use this
-
-After a visit, the useful questions are still:
-
-1. Did I want to stay?
-2. Could I see a problem of mine?
-3. Was there a next step that was not a generic form?
-
-Also notice whether they lead with **the stack**, **the critique**, **the
-outcome**, or **nothing you can feel**.
-
-Do not collect twenty sites. Four was enough for a pass. Add another only
-when one of these stops teaching, or when a site does the interactive /
-feedback-loop job better than these did.
-
-## The four
+---
 
 ### Autogram — https://autogram.is/
 
-Closest on **space**: contrast, left-aligned content, menu as a pointer.
-Home is the room. `/working/` is the miss — wall of text, hard to see
-yourself as a client, form buried under the paragraph.
-
-Lesson: first impression can be design. Services still have to be *shown*.
+> Nice use of space and contrast. Rather than center aligning the content,
+> they chose to have the content towards the left and then top right is the
+> menu, but in a nice visual way of each "Our ..." pointing back towards the
+> content like an arrow. Then when you scroll down, the menu is in the
+> bottom left with symmetry to the top right menu. Clean, minimal design I
+> like.
+>
+> The conversation, blog pieces are fine, but nothing much better than I see
+> normally.
+>
+> I will say the services page loses me, and I'd like to see a showcase or
+> case study vs. a wall of text on https://autogram.is/working/
+>
+> Overall, I like the direct feel and minimal design but wish they showed me
+> better services so I could see myself being their client.
 
 ### Lullabot — https://www.lullabot.com/
 
-Agency, not solo. Home is state / university work. Named accounts. Clean,
-uninspiring, several clicks to the meat. Resources as “1275 results” is a
-blog archive in a search costume.
+> Didn't know they only focus on state services...or maybe they don't but
+> that is what I see when I go to the homepage.
+>
+> Once again, getting to the meat of the services and work took several
+> clicks and was underwhelming. I don't see the "traffic increased 5x" type
+> of stats or anything exciting to make me care about the case studies.
+>
+> Then I see a resources page with "1275 results". What? I don't want a
+> faceted search for a set of articles.
+>
+> Idk, I don't really like it for a web agency as I find the design and flow
+> clean, but uninspiring or grabbing.
 
-Lesson: named work for a specific buyer. Not the feeling we want. Do not
-copy agency production or a faceted article dump.
+### Jacobian.org — https://jacobian.org/help/
 
-### Jacob Kaplan-Moss — https://jacobian.org/help/
+> First off the Jacobians were crazy so I'm not sure I can like this
+> site...but it is simply a blurb and list of posts.
+>
+> One post has "Software freedom activists..." and I just can't. What the
+> hell does that mean? Software is enslaved now by AI? Everyone is a damn
+> activist these days...so this guy clearly does not care about the reader
+> and selling them services or else they would have purposeful articles and
+> not balls to the wall activist content.
+>
+> "I think vegetarians are mostly right". Lol, animal parts almost came out
+> of my nose when I read that...this guy is insane.
+>
+> Can't even find my way back to the help URL you linked to above from the
+> homepage. Wow this site is awfully terrible for a web developer.
 
-`/help` is policy: free vs paid, what he will not do, email. The homepage
-is a blog; the help URL is easy to lose.
-
-**Rejected as a model for this Site.** Do not publish a won’t-do list as
-the door. Hear the idea. Limit clients after a conversation, not in the
-nav.
+Separately: `/help` as a page listing what he won't take on didn't work for
+me either. Hear the idea first; narrow after a conversation.
 
 ### Hanns Porr — https://www.hporr.com/en/content/competent-drupal-consulting-expert-knowledge-2008
 
-Negative example. Real projects, and the page still cannot say what
-changes. Eyes hurt. Wall of text. “I know Drupal.”
+> Ow is the first word I have. This site hurst my eyes with the waves and
+> contrast/color of font and background.
+>
+> Just a wall of text...bad...and sad...
+>
+> I am not inspired and my eyes hurt.
 
-Same failure mode as the playground `/work` page, with better credentials.
+Real projects and real credentials, and the page still can't say what
+changes. Same miss as the playground `/work` page, with better ingredients.
 
-## Nearby (optional)
+---
+
+## Nearby (not part of that pass)
 
 | Site | What they sell | Why it is here |
 |------|----------------|----------------|
-| [Brain Traffic](https://www.braintraffic.com/) | Content strategy; “content chaos” | Thinking is public; paid thing is governance. Optional fifth. |
-| [eaton.fyi](https://eaton.fyi) | Jeff Eaton’s own site | Same person as Autogram, personal surface. |
-| [Tag1](https://www.tag1.com/) | Drupal + performance, now AI | Shop in the middle layer. Competent, not the voice. |
-| [Drupal.org services](https://new.drupal.org/drupal-services) | Partner directory | How some buyers still search. |
-| [preston.so/about](https://preston.so/about/) | Product / CMS category | Conference + category creation. Contrast, not a model. |
+| [Brain Traffic](https://www.braintraffic.com/) | Content strategy; "content chaos" | Thinking is public; obvious offer + contact |
+| [eaton.fyi](https://eaton.fyi) | Jeff Eaton's own site | First-person solo surface |
+| [Tag1](https://www.tag1.com/) | Drupal + performance, now AI | Competent, not the voice |
+| [Drupal.org services](https://new.drupal.org/drupal-services) | Partner directory | How some buyers still search |
+| [preston.so/about](https://preston.so/about/) | Product / CMS category | Contrast, not a model |
 
-If a site offers an impression worth taking, or a lesson that is not a
-brochure, add it. That is the gap these four left.
+## What all four left on the table
 
-## What this Site is doing instead
-
-These four mostly assume a buyer who already feels a pain and will read.
-Lead capture was weak as a *feeling*: next steps buried, generic, or
-hidden.
-
-Here:
-
-- Home is space and craft (maybe a 3D or story passage)
-- Problem sets, not a services grid
-- Lesson from what they showed interest in, then talk
-- Impressions as the start of interaction, not a guess about chrome
-- No policy page that censors the incoming idea
-
-A named buyer can wait. Higher-ed giving, federal publishing, and “in-house
-team about to buy another layer” can all walk into the same site if the
-problem sets are real.
+They assume a buyer who already feels the pain and will read. The next step
+was buried, generic, or hidden every time. None of them offered anything to
+touch.
 
 ## Log
 
-- 2026-08-18 — four named; nearby table started.
-- 2026-08-20 — contrast, not model; Jacobian policy rejected; first
-  impression as the reading that counts.
+- 2026-08-18 — four visited.
+- 2026-08-28 — also style refs for the first ship (#11).
+- 2026-08-30 — raw quotes restored from #11; sanitized version deleted.
