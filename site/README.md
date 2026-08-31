@@ -1,94 +1,123 @@
-# Consulting site
+# Site
 
-Public professional surface. A stranger might hire. They hire competence, which
-here means **direct and innovative**, not a brochure.
+The consulting website. Astro, static output, one island.
 
-This should be a website worth pointing at — the example, not a quieter copy
-of Autogram / Lullabot / a help policy. Show what you can do. Walls of text
-are the anti-pattern we already felt.
+```bash
+npm install
+npm run dev            # http://localhost:4321
+npm run build          # -> dist/
+npm run serve          # build, then serve dist/ on 4321 (what ships)
+npm test               # Playwright, against the build
+npm run check          # astro check
+```
 
-Pages are jobs in `pages.md`. What we actually have is in `inventory.md`.
-Code can live here (or a sibling app) when a job is clear enough to try. Notes
-still lead; they do not freeze the build.
+### If `npm run dev` looks like it failed
 
-## This is
+Astro 7's dev server can run as a **background daemon**. When it does, the
+command prints a pid and returns to your prompt immediately — it did not
+crash. Running it again then reports *"Dev server already running"*, which
+reads like a port error but is not.
 
-- Hire-me through craft: space, problem sets, a lesson that can become a
-  conversation
-- Impressions: why someone would act, so the Site is not a wall of text they
-  have to survive
-- Voice: specific and checkable when stating facts; playful when the
-  experience needs it
-- A home for linking books when they exist
-- Allowed to use ink, Three.js, story, easter eggs, AI — if they show
-  competence and teach something
+```bash
+npm run dev:status     # is one running, and on what pid
+npm run dev:stop       # stop it
+npm run dev:logs       # tail its output
+```
 
-## This is not
+If a stale one is wedged, `npm run dev:stop` is the fix; failing that,
+`lsof -ti:4321 | xargs kill`. The same applies to `astro preview`, which is
+why the test suite uses `scripts/serve.mjs` on its own port instead.
 
-- Fake clients, fake metrics, placeholder headshots, invented testimonials
-- A Jacobian-style door that lists what I will not do
-- A services grid of synonyms for “I write code”
-- A second Mick / personal-ops system
-- Trojan Tech or any convening play
+## How it is put together
 
-Garden, shipping container, visual novel, home automation are playground
-until they demonstrate a problem set. Then they can graduate. They are not
-banned from the professional surface by genre.
+| Path | What it is |
+|------|------------|
+| `src/content/pages/**.mdx` | The pages. Theme-agnostic — nothing here knows how it will look |
+| `src/content.config.ts` | The frontmatter schema. A typo fails the build rather than rendering oddly |
+| `public/styles/<theme>.css` | A theme's tokens and character |
+| `src/themes/<theme>.json` | That theme's design and language targets, in prose |
+| `src/styles/base.css` | Structure only. Grid, chrome, components, accessibility. Defines no colours |
+| `src/layouts/Page.astro` | Picks the stylesheet and chrome for a theme |
+| `src/components/` | Chrome, `Link`, and `CareerBlob` (the island) |
+| `src/pages/` | Routing. See below |
+| `tests/` | Playwright |
 
-## Serving
+## Two output shapes
 
-Static host only. No application server that renders a new document per request.
+- **`/`, `/problems/`, `/cases/…`** — the curated site. Each page in the theme
+  its frontmatter names: Home is `broadsheet`, the CU case studies are `buff`,
+  the VA one is `federal`, the rest `paper`. This is what a stranger gets.
+- **`/t/<theme>/…`** — the whole site in one theme, for every theme.
 
-A URL is not required to be one HTML file. The app may assemble a view from
-files that already exist on the host. A user action can load another static
-asset: an HTML fragment, JS, CSS, JSON, CSV, or anything else the host will
-serve as a file. An HTML file is not automatically a page.
+Both come from the same content entries. `src/pages/[...slug].astro` renders
+the curated copy; `src/pages/t/[theme]/[...slug].astro` does the cross product
+in `getStaticPaths`. Home has its own route because Astro normalises
+`/x/index` to `/x/`, which a catch-all param cannot match.
 
-Default content still has to stand on first request. Extra files are for
-states someone asked for.
+`THEME_PREFIX` in `src/lib/site.ts` must match the directory name under
+`src/pages/` — Astro route directories are static, so changing it means
+renaming `src/pages/t/` too.
 
-## Default and opt-in
+## Links inside content
 
-You cannot force a visitor to play. The first response is the ordinary web:
-readable, complete, a bit boring on purpose. That backup is required.
+Content writes ordinary root-absolute links: `[the work](/problems/)`.
+`src/components/Link.astro` is mapped over both markdown links and literal
+`<a>` elements in MDX, and prefixes them with the current theme's base — so a
+reader stays in whichever theme they are reading. The base is derived from the
+URL being rendered, which keeps the component self-contained.
 
-If they take an Impression — select a box, apply a variant, open a nested
-slot — the Experience can deepen. Better UX is successive, not the landing
-state. No tour before the first click. No locked door if they never click.
+MDX matters here: a plain `.md` file passes raw HTML straight through without
+element mapping, so links inside raw blocks would silently escape the theme.
 
-## Component variants
+## Themes
 
-A **variant** is a named rendering of a component: style plus which content is
-included. It is not a user profile and not a site-wide personality.
+A theme is two files: `public/styles/<name>.css` and `src/themes/<name>.json`.
+The stylesheet must define every token listed at the top of `src/styles/base.css`
+— a test enforces that. The JSON carries a **design target** and a **language
+target** in prose; nothing in the build reads it beyond `label`. It is the
+brief for whoever, or whatever, authors the next page or theme.
 
-The same component can appear on the first response and in later files. A click
-asks for another authored file. The client keeps only the node that matches a
-CSS selector and swaps it onto the existing target. HTMX does this with
-`hx-get` + `hx-target` + `hx-select`. Stimulus (or a small controller next to
-Turbo) does the same job: fetch the file, `querySelector` the component, replace
-the target. The response may be a full HTML document; only the selected node
-lands on the page.
+Theme CSS lives in `public/` rather than `src/` on purpose: each page links
+exactly one theme stylesheet, so bundling all four together would defeat it.
 
-That is why variants stay static. Each file is already the component in that
-state — classes, tokens, and the blocks that belong in that reading. The host
-does not compute a new personality. It hands over a file that was written ahead
-of time.
+`broadsheet` also overrides the chrome (centred masthead, dateline) and turns
+Home into a lead-story layout via `[data-page="index"]`. That is CSS Grid
+placement only — the markup is identical in every theme and DOM order is
+untouched, so reading and focus order still follow the content.
 
-`localStorage` may remember the last variant a browser chose. The URL may name
-it if the reading should be shareable. Neither source invents the markup.
+## The island
 
-## Split from the playground
+`CareerBlob` on `/problems/` is the site's only interactive component. Six
+career stages, each described as numbers — how many lobes, how far they push
+out, how big — so any two shapes interpolate cleanly without a path-morphing
+library. Facts come from `../inventory.md`.
 
-`~/Sites/personal/content` stays the informal lab (https://alexfinnarn.github.io/).
-It already has real essays and a `/work` page that reads like a template. Do
-not “fix” `/work` in place as the consulting site.
+It is `client:visible`, so **5 of 45 pages ship any JavaScript** and the SVG
+renders server-side: the shape is there before React is, and without it. The
+stage buttons are hidden when JS is unavailable rather than offered dead, and
+the same chronology is on the page as text either way.
 
-Graduate work onto this Site when it is good enough for a stranger. Copy,
-link, or rebuild — later choice, per piece.
+## Rules that are actually rules
 
-## Open on purpose
+**Static host.** No application server rendering a document per request.
 
-The offer is still forming. Résumé title is still “Senior Full Stack
-Engineer.” Consulting is the posture. Next work is Home that makes someone
-stay, Problem Sets that are not a résumé, a Lesson that is not a generic
-form — and impressions a stranger might actually take.
+**The default stands with JS off.** Islands are the deliberate exception, one
+component at a time. A test asserts how many pages ship JavaScript, so adding
+more is a decision rather than a drift.
+
+**Do not invent proof.** No fake clients, metrics, headshots, testimonials, or
+a contact path that goes nowhere. Case studies are built only from facts in
+`../inventory.md`; each opens with a comment naming what would deepen it.
+
+## Testing
+
+`npm test` builds, serves `dist/` with `scripts/serve.mjs`, and runs
+Playwright against it. Tests run against the **build**, never the dev server —
+under Vite HMR and React dev mode the island behaves differently, which is a
+good way to waste an afternoon. That is why the suite uses its own port and
+never reuses a running server.
+
+What is covered: link integrity across all 45 pages, the JavaScript budget,
+one theme stylesheet per page, theme-scoped links in both directions, the
+theme token contract, the switcher, static accessibility checks, and the
+island (hydration, morphing, reduced motion, hidden tab, no-JS fallback).

@@ -1,27 +1,20 @@
 # Books
 
-Long-form, sequential arguments. Drafted here as markdown. Not an install of
-Writebook and not a second blog.
+Nothing here yet. A book exists when there is a title, an order, and a
+reader who should start at chapter 1.
 
-A book exists when there is a title, an order, and a reader who should start at
-chapter 1. Until then it is a candidate or a series.
+Two clusters in the playground essays could become one:
 
-## Layout
+- **AI / agents / how-not-to** — 9 of the 14 essays are tagged `AI`
+  (`002`, `004`, `006`, `007`, `008`, `009`, `012`, `013`, `014`).
+  `writing/classifier-stack.md` and `writing/three-ideas.md` are 2,600
+  words already pointed at this.
+- **CMS First Principles** — `003`, `010`, `011`, `012`. Four essays,
+  a shared thesis. Three of the four are also tagged `AI`.
 
-| Path | Role |
-|------|------|
-| `writebook.md` | How the 37signals app fits (notes only) |
-| `candidates.md` | Possible books; not commitments |
-| *(later)* `<slug>/` | One manuscript: `outline.md` + chapters |
+Add a `<slug>/` directory when an outline names an order.
 
-Do not create a `<slug>/` directory until an outline has an order that would
-actually be read.
-
-## Relationship to the Site
-
-The consulting site may link to books. It does not need a book to launch. Books
-do not need the Site to be true.
-
-Manuscripts stay in this folder even if the public renderer is Writebook on
-another host. Writebook is a paste/publish step, not the source of truth — it
-has no real import/export.
+Publishing a book later probably means [Writebook](https://github.com/basecamp/writebook)
+(self-hosted, one install is a library, web-only, no import/export). Draft
+in markdown here; paste there. A clone already sits at
+`~/Sites/personal/writebook` — do not make another.

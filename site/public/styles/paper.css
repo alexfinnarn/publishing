@@ -1,0 +1,20 @@
+/* paper — quiet editorial default */
+:root {
+  color-scheme: light;
+  --ink: var(--stone-12); --ink-soft: var(--stone-7);
+  --paper: var(--stone-0); --paper-warm: var(--stone-1);
+  --rule: var(--stone-3); --accent: var(--indigo-8); --accent-dim: var(--indigo-2);
+
+  --font-body: var(--font-sans);
+  --font-display: var(--font-sans);
+
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  --headline-measure: 22ch;
+  --measure: 64ch;
+  --breakout: 11rem;
+
+  --step-0: clamp(1rem, .96rem + .2vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.1rem + .5vw, 1.5rem);
+  --step-2: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --step-3: clamp(2rem, 1.6rem + 2vw, 3.25rem);
+}

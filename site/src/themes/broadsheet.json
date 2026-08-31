@@ -1,0 +1,7 @@
+{
+  "label": "broadsheet",
+  "design": "Front page of a serious newspaper. Serif throughout. A black utility bar, a centred masthead with a tagline, nav, and a dateline strip — availability, discipline, date, Troy, Ohio. Tight leading, small-caps kickers, one red spot colour. On wide viewports the front page becomes a lead-story layout: an outsized headline on the left, the dek in a ruled column beside it, then four problem columns with hairlines between them, all above the fold. Cards read as columns of a front page, not as boxes.",
+  "language": "Newspaper register without the parody. Lead with the fact. A dek that adds information rather than repeating the headline. Present tense for standing facts, past for work that happened. No exclamation, no second-person selling.",
+  "use_for": "Home. The one page a stranger lands on cold.",
+  "note": "The front-page layout is pure CSS Grid placement on the first three children of <main>, scoped by [data-page=\"index\"]. DOM order is untouched, so reading and focus order still run headline, dek, call to action."
+}

@@ -1,0 +1,55 @@
+---
+import '../styles/base.css';
+import Masthead from '../components/Masthead.astro';
+import BroadsheetMasthead from '../components/BroadsheetMasthead.astro';
+import Colophon from '../components/Colophon.astro';
+import { themeBase } from '../lib/site';
+
+interface Props {
+  theme: string;
+  slug: string;
+  /** Set on the per-theme copies; undefined on the curated one. */
+  themedCopy?: string;
+  title: string;
+  headTitle?: string;
+  description?: string;
+  nav?: string;
+  kicker?: string;
+  dek?: string;
+}
+
+const { theme, slug, themedCopy, title, headTitle, description = '',
+        nav = 'none', kicker, dek } = Astro.props;
+
+const base = themeBase(themedCopy);
+// data-page lets a theme treat one page specially — broadsheet turns the
+// front page into a lead-story layout with it.
+const page = slug.replace(/\//g, '-');
+const Chrome = theme === 'broadsheet' ? BroadsheetMasthead : Masthead;
+---
+<!doctype html>
+<html lang="en" data-theme={theme} data-page={page}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{headTitle ?? `${title} — Alex Finnarn`}</title>
+  <meta name="description" content={description} />
+  <link rel="stylesheet" href="/vendor/normalize.min.css" />
+  <link rel="stylesheet" href="/vendor/open-props.min.css" />
+  <link rel="stylesheet" href={`/styles/${theme}.css`} />
+</head>
+<body class="no-js">
+  <script is:inline>document.body.classList.remove("no-js")</script>
+  <a class="skip" href="#main">Skip to content</a>
+  <Chrome base={base} nav={nav} />
+
+  <main id="main" class="grid">
+    {kicker && <p class="kicker" set:html={kicker} />}
+    <h1 set:html={title} />
+    {dek && <p class="lede" set:html={dek} />}
+    <slot />
+  </main>
+
+  <Colophon base={base} slug={slug} current={themedCopy} />
+</body>
+</html>

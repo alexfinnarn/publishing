@@ -1,0 +1,28 @@
+---
+import { THEMES } from '../lib/themes';
+import { themeBase } from '../lib/site';
+interface Props { slug: string; current?: string }
+const { slug, current } = Astro.props;
+const page = slug === 'index' ? '/' : `/${slug}/`;
+// Astro special-cases the 404 route and emits /404.html at the site root,
+// while the per-theme copies are ordinary /t/<theme>/404/ directories.
+const curated = slug === '404' ? '/404.html' : page;
+const options = [
+  { href: curated, label: 'Curated', active: !current },
+  ...Object.entries(THEMES).map(([name, brief]) => ({
+    href: `${themeBase(name)}${page}`,
+    label: brief.label,
+    active: current === name,
+  })),
+];
+---
+<nav class="themes grid" aria-label="Theme">
+  <div class="inner">
+    <span class="themes-label">This page in:</span>
+    <ul>
+      {options.map(o => (
+        <li><a href={o.href} aria-current={o.active ? 'true' : undefined}>{o.label}</a></li>
+      ))}
+    </ul>
+  </div>
+</nav>
