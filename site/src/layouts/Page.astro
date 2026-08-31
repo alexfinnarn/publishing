@@ -3,7 +3,7 @@ import '../styles/base.css';
 import Masthead from '../components/Masthead.astro';
 import BroadsheetMasthead from '../components/BroadsheetMasthead.astro';
 import Colophon from '../components/Colophon.astro';
-import { themeBase } from '../lib/site';
+import { themeBase, withBase } from '../lib/site';
 
 interface Props {
   theme: string;
@@ -26,17 +26,41 @@ const base = themeBase(themedCopy);
 // front page into a lead-story layout with it.
 const page = slug.replace(/\//g, '-');
 const Chrome = theme === 'broadsheet' ? BroadsheetMasthead : Masthead;
+
+const fullTitle = headTitle ?? `${title} — Alex Finnarn`;
+
+// Canonical always points at the curated copy: /t/<theme>/about/ and /about/
+// are the same page wearing different clothes, and only one of them should
+// be the address anyone links to. (Astro emits the 404 as a file, not a
+// directory, so it is the one path that keeps an extension.)
+const curatedPath =
+  slug === 'index' ? '/' : slug === '404' ? '/404.html' : `/${slug}/`;
+const canonical = new URL(withBase(curatedPath), Astro.site);
+// A themed copy is a duplicate by design, and a 404 is not an address.
+// Follow the links either way so the curated pages still get found.
+const noindex = Boolean(themedCopy) || slug === '404';
 ---
 <!doctype html>
 <html lang="en" data-theme={theme} data-page={page}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{headTitle ?? `${title} — Alex Finnarn`}</title>
+  <title>{fullTitle}</title>
   <meta name="description" content={description} />
-  <link rel="stylesheet" href="/vendor/normalize.min.css" />
-  <link rel="stylesheet" href="/vendor/open-props.min.css" />
-  <link rel="stylesheet" href={`/styles/${theme}.css`} />
+  <link rel="canonical" href={canonical.href} />
+  {noindex && <meta name="robots" content="noindex, follow" />}
+
+  <meta property="og:type" content={slug === 'index' ? 'website' : 'article'} />
+  <meta property="og:site_name" content="Alex Finnarn" />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical.href} />
+  <meta name="twitter:card" content="summary" />
+
+  <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
+  <link rel="stylesheet" href={withBase('/vendor/normalize.min.css')} />
+  <link rel="stylesheet" href={withBase('/vendor/open-props.min.css')} />
+  <link rel="stylesheet" href={withBase(`/styles/${theme}.css`)} />
 </head>
 <body class="no-js">
   <script is:inline>document.body.classList.remove("no-js")</script>

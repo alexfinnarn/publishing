@@ -16,6 +16,7 @@
   "dependencies": {
     "@astrojs/mdx": "^7.0.8",
     "@astrojs/react": "^6.0.4",
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.2.9",
     "open-props": "^1.7.23",
     "react": "^19.2.8",
