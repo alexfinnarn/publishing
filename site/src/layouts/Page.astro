@@ -1,9 +1,8 @@
 ---
 import '../styles/base.css';
-import Masthead from '../components/Masthead.astro';
-import BroadsheetMasthead from '../components/BroadsheetMasthead.astro';
 import Colophon from '../components/Colophon.astro';
 import { themeBase, withBase } from '../lib/site';
+import { themeOrDie } from '../lib/themes';
 
 interface Props {
   theme: string;
@@ -25,7 +24,10 @@ const base = themeBase(themedCopy);
 // data-page lets a theme treat one page specially — broadsheet turns the
 // front page into a lead-story layout with it.
 const page = slug.replace(/\//g, '-');
-const Chrome = theme === 'broadsheet' ? BroadsheetMasthead : Masthead;
+// A theme supplies its own chrome when the furniture has to change shape, and
+// inherits the plain masthead when it does not. Everything below <main> is
+// the same in every theme.
+const { Chrome } = themeOrDie(theme);
 
 const fullTitle = headTitle ?? `${title} — Alex Finnarn`;
 

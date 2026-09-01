@@ -1,0 +1,16 @@
+---
+/** posts / title-led — an unordered list, title first.
+ *  The claim: this is a reading list, not an archive. The date is context you
+ *  may ignore, so it follows rather than leads. */
+import Link from '../../Link.astro';
+import type { Post } from '../types';
+const { items } = Astro.props as { items: Post[] };
+---
+<ul class="posts post-list-title-led">
+  {items.map(p => (
+    <li data-content-item>
+      <Link href={p.href}>{p.title}</Link>
+      <time datetime={p.datetime}>{p.date ?? p.datetime}</time>
+    </li>
+  ))}
+</ul>

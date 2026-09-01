@@ -1,9 +1,25 @@
-/* paper — quiet editorial default */
+/* paper — quiet editorial default, and the only theme that adapts.
+ *
+ * Every other theme is faithful to something that exists in one scheme: a
+ * front page is ink on newsprint, CU gold and VA navy are institutional
+ * palettes with no dark variant. paper is faithful to nothing, so it is the
+ * one that defers to the reader. Colours are the only tokens that change;
+ * type and space are the same in both. */
 :root {
-  color-scheme: light;
-  --ink: var(--stone-12); --ink-soft: var(--stone-7);
-  --paper: var(--stone-0); --paper-warm: var(--stone-1);
-  --rule: var(--stone-3); --accent: var(--indigo-8); --accent-dim: var(--indigo-2);
+  color-scheme: light dark;
+
+  --ink:        light-dark(var(--stone-12), var(--stone-1));
+  /* stone-7 was 3.71:1 on this ground — below WCAG AA for the small text it
+     carries (.evidence, card copy, the colophon). stone-8 is 5.3:1 on --paper
+     and 5.03:1 on --paper-warm, and still reads as secondary. */
+  --ink-soft:   light-dark(var(--stone-8),  var(--stone-5));
+  --paper:      light-dark(var(--stone-0),  #14161a);
+  --paper-warm: light-dark(var(--stone-1),  #1c1f24);
+  --rule:       light-dark(var(--stone-3),  #2e333b);
+  /* indigo-8 carries on white but goes muddy on a dark ground; indigo-3 is
+     the same hue at a lightness that clears contrast the other way. */
+  --accent:     light-dark(var(--indigo-8), var(--indigo-3));
+  --accent-dim: light-dark(var(--indigo-2), #1e2740);
 
   --font-body: var(--font-sans);
   --font-display: var(--font-sans);

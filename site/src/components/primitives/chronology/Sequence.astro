@@ -1,0 +1,20 @@
+---
+/** chronology / sequence — an ordered list.
+ *
+ *  The claim: these happened in an order and the order is the information.
+ *  Announced as a list of N items, counted, so a reader is told how many
+ *  stops there were before reading any of them. */
+import type { Entry } from './types';
+const { entries } = Astro.props as { entries: Entry[] };
+---
+<ol class="chronology chronology-sequence">
+  {entries.map(e => (
+    <li data-content-item>
+      <time>{e.when}</time>
+      <span class="what">
+        <strong>{e.where}</strong>{e.role && <> — {e.role}</>}
+        <span>{e.what}</span>
+      </span>
+    </li>
+  ))}
+</ol>

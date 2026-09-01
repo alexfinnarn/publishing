@@ -23,6 +23,6 @@ export default defineConfig({
     // a visitor to play with, not for a search engine to pick a winner from,
     // so they stay out of the sitemap and carry noindex + a canonical back to
     // the curated page (see Page.astro).
-    sitemap({ filter: page => !page.includes('/t/') }),
+    sitemap({ filter: page => !page.includes('/t/') && !page.endsWith('/design.json') }),
   ],
 });

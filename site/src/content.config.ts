@@ -13,6 +13,11 @@ const pages = defineCollection({
     theme: z.enum(['paper', 'broadsheet', 'buff', 'federal']).default('paper'),
     /** Which nav item to mark current. */
     nav: z.enum(['home', 'problems', 'about', 'writing', 'contact', 'none']).default('none'),
+    /** The page's menu: which primitives it serves, in the order it serves
+     *  them. The composer plans the whole run before anything renders, so a
+     *  course can be chosen with the rest of the page in view. A test asserts
+     *  this matches what the body actually uses. */
+    courses: z.array(z.string()).default([]),
     /** Optional themed slots. A theme renders them if present, nothing if not. */
     kicker: z.string().optional(),
     dek: z.string().optional(),

@@ -4,37 +4,40 @@ nav: writing
 title: "Writing"
 dek: "Two threads, mostly. What a CMS is actually for once you stop starting from the admin UI — and what AI tooling really does to the shape of the work, as opposed to what the marketing says."
 description: "Essays on CMS first principles and on what AI tooling does to the shape of the work."
+courses: [posts, posts, posts]
 order: 4
 ---
 
-import Link from '../../components/Link.astro';
+export const principles = [
+  { datetime: '2025-06-25', date: 'Jun 25, 2025', title: 'Content Over Complexity', href: 'https://alexfinnarn.github.io/writing/012-cms-content-complexity' },
+  { datetime: '2025-06-18', date: 'Jun 18, 2025', title: 'Intent over Implementation', href: 'https://alexfinnarn.github.io/writing/011-cms-intent-over-implementation' },
+  { datetime: '2025-06-14', date: 'Jun 14, 2025', title: 'You will succeed', href: 'https://alexfinnarn.github.io/writing/010-cms-can-fail-you-succeed' },
+  { datetime: '2025-05-23', date: 'May 23, 2025', title: 'Creating CMS First Principles', href: 'https://alexfinnarn.github.io/writing/003-cms-first-principles' },
+];
+export const aiHonestly = [
+  { datetime: '2025-07-27', date: 'Jul 27, 2025', title: 'AI Workflows: Moving to Code', href: 'https://alexfinnarn.github.io/writing/014-workflow-to-code' },
+  { datetime: '2025-07-09', date: 'Jul 9, 2025', title: 'Limit Tokens for Web Scraping', href: 'https://alexfinnarn.github.io/writing/013-limit-playwright-tokens' },
+  { datetime: '2025-06-09', date: 'Jun 9, 2025', title: 'Yes, your job is definitely in jeopardy', href: 'https://alexfinnarn.github.io/writing/009-ai-will-take-your-job' },
+  { datetime: '2025-06-06', date: 'Jun 6, 2025', title: 'How Not To AI: Adapt your big bloated framework', href: 'https://alexfinnarn.github.io/writing/008-ai-drupal-not' },
+  { datetime: '2025-06-03', date: 'Jun 3, 2025', title: 'Prompts are Tickets', href: 'https://alexfinnarn.github.io/writing/006-prompts-are-tickets' },
+  { date: '2025', title: 'How Not To AI: Auto-generated Text', href: 'https://alexfinnarn.github.io/writing/007-ai-marketing-headlines' },
+];
+export const tools = [
+  { date: '2025', title: 'Creating My First MCP Server', href: 'https://alexfinnarn.github.io/writing/004-first-mcp-server' },
+  { date: '2025', title: 'How Not To MCP', href: 'https://alexfinnarn.github.io/writing/002-how-not-to-mcp' },
+  { date: '2025', title: 'Exploring DAG Tooling', href: 'https://alexfinnarn.github.io/writing/005-dag-tools' },
+];
 
 These currently live on my personal site. Full text at each link.
 
 ## CMS First Principles
 
-<ul class="posts">
-  <li><time datetime="2025-06-25">Jun 25, 2025</time><Link href="https://alexfinnarn.github.io/writing/012-cms-content-complexity">Content Over Complexity</Link></li>
-  <li><time datetime="2025-06-18">Jun 18, 2025</time><Link href="https://alexfinnarn.github.io/writing/011-cms-intent-over-implementation">Intent over Implementation</Link></li>
-  <li><time datetime="2025-06-14">Jun 14, 2025</time><Link href="https://alexfinnarn.github.io/writing/010-cms-can-fail-you-succeed">You will succeed</Link></li>
-  <li><time datetime="2025-05-23">May 23, 2025</time><Link href="https://alexfinnarn.github.io/writing/003-cms-first-principles">Creating CMS First Principles</Link></li>
-</ul>
+<PostList items={principles} />
 
 ## AI, honestly
 
-<ul class="posts">
-  <li><time datetime="2025-07-27">Jul 27, 2025</time><Link href="https://alexfinnarn.github.io/writing/014-workflow-to-code">AI Workflows: Moving to Code</Link></li>
-  <li><time datetime="2025-07-09">Jul 9, 2025</time><Link href="https://alexfinnarn.github.io/writing/013-limit-playwright-tokens">Limit Tokens for Web Scraping</Link></li>
-  <li><time datetime="2025-06-09">Jun 9, 2025</time><Link href="https://alexfinnarn.github.io/writing/009-ai-will-take-your-job">Yes, your job is definitely in jeopardy</Link></li>
-  <li><time datetime="2025-06-06">Jun 6, 2025</time><Link href="https://alexfinnarn.github.io/writing/008-ai-drupal-not">How Not To AI: Adapt your big bloated framework</Link></li>
-  <li><time datetime="2025-06-03">Jun 3, 2025</time><Link href="https://alexfinnarn.github.io/writing/006-prompts-are-tickets">Prompts are Tickets</Link></li>
-  <li><time>2025</time><Link href="https://alexfinnarn.github.io/writing/007-ai-marketing-headlines">How Not To AI: Auto-generated Text</Link></li>
-</ul>
+<PostList items={aiHonestly} />
 
 ## Tools and experiments
 
-<ul class="posts">
-  <li><time>2025</time><Link href="https://alexfinnarn.github.io/writing/004-first-mcp-server">Creating My First MCP Server</Link></li>
-  <li><time>2025</time><Link href="https://alexfinnarn.github.io/writing/002-how-not-to-mcp">How Not To MCP</Link></li>
-  <li><time>2025</time><Link href="https://alexfinnarn.github.io/writing/005-dag-tools">Exploring DAG Tooling</Link></li>
-</ul>
+<PostList items={tools} />

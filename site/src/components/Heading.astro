@@ -1,0 +1,15 @@
+---
+/** Section heading.
+ *
+ *  Every theme gets this, and the span is deliberately NOT a variant. It makes
+ *  no claim — it is a shrink-wrap hook, because an <h2> is a grid child and
+ *  stretches to its column, so anything drawn on it runs the full width
+ *  however short the headline is. That is styling, and styling that needs a
+ *  hook belongs to every theme rather than to one.
+ *
+ *  (It started life as a broadsheet-only override. The rule that a variant
+ *  must change what a screen reader says is what moved it here: this changes
+ *  nothing a screen reader says, so it could not earn a variant name.) */
+const { 'class': cls, ...rest } = Astro.props;
+---
+<h2 class:list={cls} {...rest}><span class="hed-text"><slot /></span></h2>

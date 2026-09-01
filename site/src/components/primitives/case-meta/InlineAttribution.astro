@@ -1,0 +1,19 @@
+---
+/** case-meta / inline-attribution — a paragraph.
+ *
+ *  The claim: this is provenance to be read, not a structure to be scanned.
+ *  Announced as prose, with no list to enter or exit.
+ *
+ *  The separators are the theme's words, not the content's, so they carry
+ *  data-theme-copy and stay out of the equivalence contract. */
+import type { Field } from '../types';
+const { items } = Astro.props as { items: Field[] };
+---
+<p class="case-meta case-meta-inline-attribution">
+  {items.map((f, i) => (
+    <>
+      {i > 0 && <span data-theme-copy> · </span>}
+      <span data-content-item><span class="k">{f.k}</span> {f.v}</span>
+    </>
+  ))}
+</p>

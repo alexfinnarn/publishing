@@ -6,6 +6,7 @@ title: "Splitting a giving platform from its CMS"
 dek: "Roughly $5.4 million a year moved through this system. It shared a codebase with the marketing site. That meant a content deploy and a donations outage were the same event waiting to happen."
 headTitle: "Splitting a giving platform from its CMS — Alex Finnarn"
 description: "A domain-driven migration so a content problem stopped being a donations outage."
+courses: [case-meta]
 order: 20
 ---
 
@@ -17,11 +18,11 @@ import Link from '../../../components/Link.astro';
      contexts ended up being, what you would do differently.
      No invented metrics. */}
 
-<div class="case-meta">
-  <div><span class="k">Scale</span> ~$5.4M processed annually</div>
-  <div><span class="k">Approach</span> Domain-driven design</div>
-  <div><span class="k">Method</span> Kanban · Theory of Constraints</div>
-</div>
+<CaseMeta items={[
+  { k: 'Scale', v: '~$5.4M processed annually' },
+  { k: 'Approach', v: 'Domain-driven design' },
+  { k: 'Method', v: 'Kanban · Theory of Constraints' },
+]} />
 
 ## The situation
 

@@ -1,0 +1,17 @@
+---
+/** cases / peer-set — an unordered list of links.
+ *  The claim: here are further pages, take any. No page is privileged and the
+ *  context is incidental. */
+import Link from '../../Link.astro';
+import type { CaseRef } from '../types';
+const { items } = Astro.props as { items: CaseRef[] };
+---
+<ul class="cases case-list-peer-set">
+  {items.map(c => (
+    <li data-content-item>
+      <Link class="case-link" href={c.href}>
+        <strong>{c.title}</strong><span>{c.context}</span>
+      </Link>
+    </li>
+  ))}
+</ul>

@@ -1,0 +1,20 @@
+---
+/** CaseList — the primitive. Content hands it data and says nothing about
+ *  markup; the theme's `render` map says what the data IS, and one of the
+ *  variants makes that claim in HTML. Content never imports this — it
+ *  arrives through the theme's component map. */
+import { resolveVariant } from './resolve';
+import PeerSet from './case-list/PeerSet.astro';
+import AnnotatedIndex from './case-list/AnnotatedIndex.astro';
+
+const { items, course = 0 } = Astro.props;
+const variant = await resolveVariant(Astro.url.pathname, 'cases', course);
+
+const BY_VARIANT = {
+  'peer-set': PeerSet,
+  'annotated-index': AnnotatedIndex,
+} as const;
+
+const Variant = BY_VARIANT[variant as keyof typeof BY_VARIANT];
+---
+<Variant items={items} />

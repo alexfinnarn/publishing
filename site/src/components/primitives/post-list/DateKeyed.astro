@@ -1,0 +1,16 @@
+---
+/** posts / date-keyed — a description list.
+ *  The claim: this is an archive. When a thing was written is how you find it,
+ *  so the date is the term and the piece is its description. */
+import Link from '../../Link.astro';
+import type { Post } from '../types';
+const { items } = Astro.props as { items: Post[] };
+---
+<dl class="posts post-list-date-keyed">
+  {items.map(p => (
+    <div class="entry" data-content-item>
+      <dt><time datetime={p.datetime}>{p.date ?? p.datetime}</time></dt>
+      <dd><Link href={p.href}>{p.title}</Link></dd>
+    </div>
+  ))}
+</dl>
