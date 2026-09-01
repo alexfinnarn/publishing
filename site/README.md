@@ -4,7 +4,7 @@ The consulting website. Astro, static output, one island.
 
 ```bash
 npm install
-npm run dev            # http://localhost:4321
+npm run dev            # http://localhost:4321/publishing/
 npm run build          # -> dist/
 npm run serve          # build, then serve dist/ on 4321 (what ships)
 npm test               # Playwright, against the build
@@ -40,6 +40,7 @@ why the test suite uses `scripts/serve.mjs` on its own port instead.
 | `src/layouts/Page.astro` | Picks the stylesheet and chrome for a theme |
 | `src/components/` | Chrome, `Link`, and `CareerBlob` (the island) |
 | `src/pages/` | Routing. See below |
+| `site.config.mjs` | Where the site is published: origin and base path |
 | `tests/` | Playwright |
 
 ## Two output shapes
@@ -57,6 +58,45 @@ in `getStaticPaths`. Home has its own route because Astro normalises
 `THEME_PREFIX` in `src/lib/site.ts` must match the directory name under
 `src/pages/` — Astro route directories are static, so changing it means
 renaming `src/pages/t/` too.
+
+## Where it is published
+
+`site.config.mjs` holds the two facts about the deploy, and it is the only
+place that holds them:
+
+```js
+export const SITE = 'https://alexfinnarn.github.io';
+export const BASE = '/publishing';
+```
+
+Today that is a GitHub Pages **project** site, so everything is served from
+`/publishing/`. `.github/workflows/deploy.yml` builds and publishes on every
+push to `main` that touches `site/` (Pages must be set to "GitHub Actions" as
+its source once, in the repository settings). `ci.yml` runs `astro check`, the
+build, and the tests on the same push, so the deploy workflow does not repeat
+them.
+
+Launch — a real domain at the root — is `BASE = ''` and a new `SITE` here, plus
+a `CNAME`. Nothing else moves: `astro.config.mjs`, the canonical and `og:`
+URLs, `scripts/serve.mjs`, and the Playwright `baseURL` all read these.
+
+Astro only rewrites the URLs *it* generates. Every root-absolute URL written
+by hand goes through `withBase()` in `src/lib/site.ts`, and a test fails any
+`href` in the output that is missing the base path — that failure mode is
+invisible locally at the root and total on the live site.
+
+## Search engines and sharing
+
+Each page carries a canonical URL, `og:` and `twitter:` tags, and a favicon.
+The canonical always points at the **curated** copy: `/t/buff/about/` and
+`/about/` are one page in different clothes, and only one of them should be
+the address anyone links to. The themed copies also carry
+`robots: noindex, follow` and are filtered out of the sitemap
+(`@astrojs/sitemap`, at `/publishing/sitemap-index.xml`), so four duplicate
+copies of the site cannot compete with it.
+
+There is no `robots.txt`: crawlers only read one at a domain root, and this
+site does not own `alexfinnarn.github.io/`. It becomes worth adding at launch.
 
 ## Links inside content
 
@@ -117,7 +157,9 @@ under Vite HMR and React dev mode the island behaves differently, which is a
 good way to waste an afternoon. That is why the suite uses its own port and
 never reuses a running server.
 
-What is covered: link integrity across all 45 pages, the JavaScript budget,
-one theme stylesheet per page, theme-scoped links in both directions, the
-theme token contract, the switcher, static accessibility checks, and the
-island (hydration, morphing, reduced motion, hidden tab, no-JS fallback).
+What is covered: link integrity across all 45 pages (including that every
+one carries the base path), the JavaScript budget, one theme stylesheet per
+page, theme-scoped links in both directions, the theme token contract, the
+switcher, canonical URLs and `noindex` on the copies, the sitemap's contents,
+static accessibility checks, and the island (hydration, morphing, reduced
+motion, hidden tab, no-JS fallback).

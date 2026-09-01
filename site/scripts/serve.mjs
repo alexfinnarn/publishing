@@ -9,6 +9,7 @@
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { join, extname, normalize } from 'node:path';
+import { BASE } from '../site.config.mjs';
 
 const dir = process.argv[2] ?? 'dist';
 const port = Number(process.argv[3] ?? 4322);
@@ -22,7 +23,11 @@ const TYPES = {
 
 createServer(async (req, res) => {
   const url = decodeURIComponent((req.url ?? '/').split('?')[0]);
-  let file = join(dir, normalize(url).replace(/^(\.\.[/\\])+/, ''));
+  // The build emits site-root paths into dist/, but every href it writes is
+  // prefixed with the deploy's base path. Mount dist/ there, the way the
+  // host does, so a link that works here works there.
+  if (BASE && !url.startsWith(BASE)) return notFound(res);
+  let file = join(dir, normalize(url.slice(BASE.length) || '/').replace(/^(\.\.[/\\])+/, ''));
   try {
     if ((await stat(file)).isDirectory()) file = join(file, 'index.html');
   } catch {
@@ -33,9 +38,14 @@ createServer(async (req, res) => {
     res.writeHead(200, { 'content-type': TYPES[extname(file)] ?? 'application/octet-stream' });
     res.end(body);
   } catch {
-    try {
-      res.writeHead(404, { 'content-type': 'text/html; charset=utf-8' });
-      res.end(await readFile(join(dir, '404', 'index.html')));
-    } catch { res.writeHead(404).end('Not found'); }
+    await notFound(res);
   }
-}).listen(port, () => console.log(`serving ${dir} on http://localhost:${port}`));
+}).listen(port, () =>
+  console.log(`serving ${dir} on http://localhost:${port}${BASE}/`));
+
+async function notFound(res) {
+  try {
+    res.writeHead(404, { 'content-type': 'text/html; charset=utf-8' });
+    res.end(await readFile(join(dir, '404.html')));
+  } catch { res.writeHead(404).end('Not found'); }
+}

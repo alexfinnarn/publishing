@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 test('renders without JavaScript', async ({ browser }) => {
   const ctx = await browser.newContext({ javaScriptEnabled: false });
   const page = await ctx.newPage();
-  await page.goto('/problems/');
+  await page.goto('problems/');
 
   // The shape is server-rendered, so it is there before (and without) React.
   const d = await page.locator('.blob-figure path').getAttribute('d');
@@ -20,7 +20,7 @@ test('renders without JavaScript', async ({ browser }) => {
 });
 
 test('hydrates and morphs between stages', async ({ page }) => {
-  await page.goto('/problems/');
+  await page.goto('problems/');
   const blob = page.locator('.blob');
   await blob.scrollIntoViewIfNeeded();
 
@@ -41,7 +41,7 @@ test('hydrates and morphs between stages', async ({ page }) => {
 });
 
 test('every stage produces a distinct shape', async ({ page }) => {
-  await page.goto('/problems/');
+  await page.goto('problems/');
   await page.locator('.blob').scrollIntoViewIfNeeded();
   const buttons = page.locator('.blob-controls button');
   const path = page.locator('.blob-figure path');
@@ -58,7 +58,7 @@ test('every stage produces a distinct shape', async ({ page }) => {
 test('the shape updates even when the tab is hidden', async ({ page }) => {
   // requestAnimationFrame is suspended in a background tab; the component
   // must snap rather than leave a stale shape.
-  await page.goto('/problems/');
+  await page.goto('problems/');
   await page.locator('.blob').scrollIntoViewIfNeeded();
   const path = page.locator('.blob-figure path');
   const before = await path.getAttribute('d');
@@ -74,7 +74,7 @@ test('the shape updates even when the tab is hidden', async ({ page }) => {
 test('respects prefers-reduced-motion', async ({ browser }) => {
   const ctx = await browser.newContext({ reducedMotion: 'reduce' });
   const page = await ctx.newPage();
-  await page.goto('/problems/');
+  await page.goto('problems/');
   await page.locator('.blob').scrollIntoViewIfNeeded();
   const path = page.locator('.blob-figure path');
   const before = await path.getAttribute('d');

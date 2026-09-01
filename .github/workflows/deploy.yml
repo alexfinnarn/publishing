@@ -1,0 +1,59 @@
+# Publish the built site to GitHub Pages.
+#
+# Pages has to be switched to "GitHub Actions" as its source in the repository
+# settings once; after that this workflow owns the deploy.
+#
+# Deliberately thin: ci.yml already runs `astro check`, the build, and the
+# Playwright suite on every push to main, so this does not repeat them. Where
+# the site ends up (origin and base path) is site/site.config.mjs, not here.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+# Read the repo, write a Pages deployment, and mint the OIDC token
+# deploy-pages needs. Nothing else.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it half-published, but
+# never queue more than one behind it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
