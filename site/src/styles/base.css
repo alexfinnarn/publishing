@@ -234,41 +234,111 @@ a.email { font-size: var(--step-1); font-weight: var(--font-weight-6); }
 /* ---------- career blob island (problems, "outgrew its shape") ---------- */
 
 .blob {
-  display: grid; gap: var(--size-5);
-  grid-template-columns: minmax(0, 1fr);
-  align-items: center;
-  margin-block: var(--size-6);
-  padding: var(--size-5);
-  background: var(--paper-warm);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-3);
+  --blob-fill: var(--ink);
+  --blob-text: var(--paper);
+  --blob-soft: color-mix(in srgb, var(--paper) 72%, transparent);
+  inline-size: min(72rem, calc(100vw - (var(--gutter) * 2)), calc(100% + (var(--breakout) * 2)));
+  position: relative; inset-inline-start: 50%; transform: translateX(-50%);
+  display: grid; gap: var(--size-4);
+  margin-block: var(--size-7) var(--size-8);
+  padding-block: var(--size-5);
+  overflow: clip;
 }
-@container (min-width: 34rem) {
-  .blob { grid-template-columns: 15rem minmax(0, 1fr); }
+.blob-tone-1 {
+  --blob-fill: var(--accent-dim);
+  --blob-text: var(--ink);
+  --blob-soft: var(--ink-soft);
+}
+.blob-tone-2 {
+  --blob-fill: var(--paper-warm);
+  --blob-text: var(--ink);
+  --blob-soft: var(--ink-soft);
 }
 
-.blob-figure svg { inline-size: 100%; block-size: auto; display: block; }
-.blob-figure path { fill: var(--accent); opacity: .16; stroke: var(--accent); stroke-width: 1.5; }
+.blob-hint {
+  max-inline-size: 58ch; margin: 0 auto; padding-inline: var(--size-4);
+  text-align: center; font-size: var(--font-size-1); color: var(--ink-soft);
+}
+.blob-canvas {
+  position: relative; display: grid; place-items: center;
+  inline-size: min(100%, 42rem); margin-inline: auto;
+}
+.blob-figure { grid-area: 1 / 1; inline-size: 100%; }
+.blob-figure svg { inline-size: 100%; block-size: auto; display: block; overflow: visible; }
+.blob-figure path { transition: fill .35s, stroke .35s; }
+.blob-figure .blob-shape {
+  fill: var(--blob-fill); stroke: var(--blob-fill); stroke-width: 1.5;
+}
 
-.blob-hint  { font-size: var(--font-size-1); color: var(--ink-soft); }
-.blob-where { margin-block-end: var(--size-1); }
-.blob-what  { margin-block-end: 0; min-block-size: 4.5em; }
+.blob-proof {
+  grid-area: 1 / 1; z-index: 1; pointer-events: none;
+  inline-size: 52%; text-align: center; color: var(--blob-text);
+  display: grid; justify-items: center; gap: var(--size-1);
+  transition: color .35s;
+}
+.blob-proof > span:first-child {
+  color: var(--blob-soft); font-size: var(--font-size-0);
+  letter-spacing: var(--font-letterspacing-2); text-transform: uppercase;
+}
+.blob-proof strong {
+  max-inline-size: 13ch; font-family: var(--font-display);
+  font-size: clamp(1.45rem, 4.8vw, 3.25rem); line-height: 1;
+  text-wrap: balance;
+}
+.blob-proof > span:last-child { color: var(--blob-soft); font-size: var(--font-size-1); }
+
+.blob-body { display: grid; gap: var(--size-4); }
+.blob-what {
+  max-inline-size: 54ch; min-block-size: 3em;
+  margin: 0 auto; padding-inline: var(--size-4); text-align: center;
+}
 
 .blob-controls {
-  display: flex; flex-wrap: wrap; gap: var(--size-2);
-  margin-block: var(--size-4);
+  position: relative;
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--size-2); margin: 0; padding-inline: var(--size-4);
+}
+.blob-controls::before {
+  content: ""; position: absolute; z-index: -1;
+  inset-inline: var(--size-7); inset-block-start: 1rem;
+  border-block-start: 1px solid var(--rule);
 }
 .blob-controls button {
+  min-inline-size: 0; display: grid; justify-items: center; gap: var(--size-1);
   font: inherit; font-size: var(--font-size-0); cursor: pointer;
-  padding: var(--size-1) var(--size-3);
-  border: 1px solid var(--rule); border-radius: var(--radius-round);
-  background: var(--paper); color: var(--ink-soft);
+  padding: 0 var(--size-1); border: 0;
+  background: transparent; color: var(--ink-soft);
   font-variant-numeric: tabular-nums;
-  transition: background .15s, border-color .15s, color .15s;
+  transition: color .15s;
 }
-.blob-controls button:hover { border-color: var(--accent); color: var(--accent); }
-.blob-controls button[aria-pressed="true"] {
-  background: var(--ink); border-color: var(--ink); color: var(--paper);
+.blob-controls button::before {
+  content: ""; inline-size: .75rem; block-size: .75rem;
+  border: 2px solid var(--paper); border-radius: var(--radius-round);
+  background: var(--rule); box-shadow: 0 0 0 1px var(--rule);
+  transition: background .15s, transform .15s;
+}
+.blob-controls button:hover { color: var(--accent); }
+.blob-controls button[aria-pressed="true"] { color: var(--ink); }
+.blob-controls button[aria-pressed="true"]::before {
+  background: var(--accent); box-shadow: 0 0 0 1px var(--accent);
+  transform: scale(1.25);
+}
+.blob-controls button::after {
+  content: attr(data-where); font-weight: var(--font-weight-6);
+  font-size: var(--font-size-0); line-height: 1.2;
+}
+
+@media (width < 42rem) {
+  .blob { inline-size: calc(100vw - (var(--gutter) * 2)); }
+  .blob-canvas { inline-size: min(118%, 28rem); margin-inline: -9%; }
+  .blob-proof { inline-size: 48%; }
+  .blob-proof strong { font-size: clamp(1.25rem, 7vw, 2rem); }
+  .blob-proof > span:last-child { max-inline-size: 18ch; }
+  .blob-controls {
+    grid-template-columns: repeat(3, 1fr); gap: var(--size-3) var(--size-2);
+  }
+  .blob-controls::before { display: none; }
+  .blob-controls button::after { display: none; }
 }
 
 /* No JS: the buttons cannot do anything, so hide them rather than offer a
