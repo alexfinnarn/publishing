@@ -13,6 +13,8 @@ import { useEffect, useRef, useState } from 'react';
 type Stage = {
   years: string;
   where: string;
+  /** the checkable fact that gives the shape its weight */
+  proof: string;
   what: string;
   /** lobes around the circumference — roughly, how many separate things */
   lobes: number;
@@ -25,31 +27,37 @@ type Stage = {
 const STAGES: Stage[] = [
   {
     years: '2013–2014', where: 'Sogeti',
+    proof: '1 multisite · team of 4',
     what: 'One Drupal 7 multisite for Ethicon, an offshore team of four. Small, regular, the shape someone actually drew.',
     lobes: 3, wobble: 0.08, scale: 0.44,
   },
   {
     years: '2014–2015', where: 'Coplex',
+    proof: '15–20 client sites',
     what: 'Fifteen to twenty client sites under maintenance. Not one big thing — many small ones, each with its own edge.',
     lobes: 11, wobble: 0.30, scale: 0.60,
   },
   {
     years: '2015–2019', where: 'University of Colorado',
+    proof: '1,000+ sites · 50+ repositories',
     what: 'A Vue UI deploying to over a thousand sites, CI across fifty repositories. Big, and pulling in every direction at once.',
     lobes: 8, wobble: 0.52, scale: 0.94,
   },
   {
     years: '2019', where: 'Highlights for Children',
+    proof: 'Drupal 7 → Drupal 8',
     what: 'A Drupal 7 family of sites, and the beginning of the D8 platform. A shape mid-way through becoming another shape.',
     lobes: 5, wobble: 0.38, scale: 0.70,
   },
   {
     years: '2020–2022', where: 'University of Colorado',
+    proof: '$5.4M processed annually',
     what: 'The giving platform — $5.4M a year through one system. One heavy lobe that could not be allowed to fail.',
     lobes: 4, wobble: 0.44, scale: 0.78,
   },
   {
     years: '2022–2024', where: 'CivicActions',
+    proof: '≈15 federal Drupal sites',
     what: 'Federal publishing across roughly fifteen Drupal sites. Large, lobed, and every lobe answerable to someone.',
     lobes: 7, wobble: 0.34, scale: 1.0,
   },
@@ -60,7 +68,9 @@ const SIZE = 260;
 
 /** Radii for one stage, sampled at POINTS around the circle. */
 function radii(s: Stage): number[] {
-  const base = 34 + s.scale * 56;
+  // Fill more of the viewBox than the original thumbnail-sized treatment.
+  // Even the smallest stage keeps a broad, quiet centre for its proof text.
+  const base = 58 + s.scale * 64;
   return Array.from({ length: POINTS }, (_, i) => {
     const a = (i / POINTS) * Math.PI * 2;
     const lobe = Math.sin(a * s.lobes);
@@ -127,32 +137,41 @@ export default function CareerBlob() {
   const s = STAGES[active];
 
   return (
-    <div className="blob">
-      <div className="blob-figure">
-        <svg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img"
-             aria-label={`An abstract shape representing ${s.where}, ${s.years}`}>
-          <path d={path} />
-        </svg>
+    <div className={`blob blob-tone-${active % 3}`}>
+      <p className="blob-hint">
+        One career, six system shapes. Each is a visual metaphor for how many
+        things were in play and how far the platform had drifted from anything
+        one person would design.
+      </p>
+
+      <div className="blob-canvas">
+        <div className="blob-figure">
+          <svg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img"
+               aria-label={`An abstract shape representing ${s.where}, ${s.years}`}>
+            <path className="blob-shape" d={path} />
+          </svg>
+        </div>
+
+        <div className="blob-proof" aria-live="polite">
+          <span>Stage {active + 1} of {STAGES.length}</span>
+          <strong>{s.proof}</strong>
+          <span>{s.where} · {s.years}</span>
+        </div>
       </div>
 
       <div className="blob-body">
-        <p className="blob-hint">
-          The same platform, six times. Step through it &mdash; the shape is
-          generated from how many things were in play and how far each had
-          drifted from anything anyone designed.
-        </p>
-
         <div className="blob-controls" role="group" aria-label="Career stage">
           {STAGES.map((st, i) => (
             <button key={st.years + st.where} type="button"
                     onClick={() => setActive(i)}
-                    aria-pressed={i === active}>
-              {st.years}
+                    aria-label={`${st.where}, ${st.years}`}
+                    aria-pressed={i === active}
+                    data-where={st.where}>
+              <span>{st.years}</span>
             </button>
           ))}
         </div>
 
-        <p className="blob-where"><strong>{s.where}</strong> &middot; {s.years}</p>
         <p className="blob-what" aria-live="polite">{s.what}</p>
       </div>
     </div>
