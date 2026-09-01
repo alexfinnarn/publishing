@@ -47,17 +47,38 @@ why the test suite uses `scripts/serve.mjs` on its own port instead.
 | `site.config.mjs` | Where the site is published: origin and base path |
 | `tests/` | Playwright |
 
-## Two output shapes
+## One version of each page
 
-- **`/`, `/problems/`, `/cases/…`** — the curated site. Each page in the theme
-  its frontmatter names: Home is `broadsheet`, the CU case studies are `buff`,
-  the VA one is `federal`, the rest `paper`. This is what a stranger gets.
-- **`/t/<theme>/…`** — the whole site in one theme, for every theme.
+Every page ships once, in the theme its frontmatter names: Home is
+`broadsheet`, the CU case studies are `buff`, the VA one is `federal`, the rest
+`paper`. `src/pages/[...slug].astro` renders them; Home has its own route
+because Astro normalises `/x/index` to `/x/`, which a catch-all param cannot
+match.
 
-Both come from the same content entries. `src/pages/[...slug].astro` renders
-the curated copy; `src/pages/t/[theme]/[...slug].astro` does the cross product
-in `getStaticPaths`. Home has its own route because Astro normalises
-`/x/index` to `/x/`, which a catch-all param cannot match.
+A theme is a property of a page, not a costume the reader chooses. There is no
+switcher, and no second copy of the site to switch to.
+
+### The theme fixture
+
+The contract underneath the primitives — *a theme may choose the tags, never
+the words or their order* — can only be checked by rendering the same content
+more than one way. So the routes under `src/pages/t/[theme]/` still exist and
+still build every page in every theme, but **only when `THEME_MATRIX` is set**:
+
+```bash
+npm run build          # 9 pages. What deploys.
+npm run build:matrix   # 45 pages. What the tests run against.
+```
+
+Keep the property, drop the URLs. A test builds the deploy way, into a
+throwaway directory, and fails if a single `/t/` page appears or if any page
+still carries a switcher — an actual production build rather than a grep over
+the workflow file.
+
+Both build scripts clear `dist` first. Astro does not empty it, so a production
+build on top of a matrix build would otherwise leave 36 orphaned fixture pages
+sitting in the deploy — the same stale-output failure this project has hit
+before.
 
 `THEME_PREFIX` in `src/lib/site.ts` must match the directory name under
 `src/pages/` — Astro route directories are static, so changing it means
@@ -92,12 +113,10 @@ invisible locally at the root and total on the live site.
 ## Search engines and sharing
 
 Each page carries a canonical URL, `og:` and `twitter:` tags, and a favicon.
-The canonical always points at the **curated** copy: `/t/buff/about/` and
-`/about/` are one page in different clothes, and only one of them should be
-the address anyone links to. The themed copies also carry
-`robots: noindex, follow` and are filtered out of the sitemap
-(`@astrojs/sitemap`, at `/publishing/sitemap-index.xml`), so four duplicate
-copies of the site cannot compete with it.
+Every page has one address, so nothing competes with anything. The 404 carries
+`robots: noindex, follow` because it is not an address; the fixture copies
+carry it too, and are filtered out of the sitemap (`@astrojs/sitemap`, at
+`/publishing/sitemap-index.xml`), so a stray matrix build cannot be crawled.
 
 There is no `robots.txt`: crawlers only read one at a domain root, and this
 site does not own `alexfinnarn.github.io/`. It becomes worth adding at launch.
@@ -106,12 +125,14 @@ site does not own `alexfinnarn.github.io/`. It becomes worth adding at launch.
 
 Content writes ordinary root-absolute links: `[the work](/problems/)`.
 `src/components/Link.astro` is mapped over both markdown links and literal
-`<a>` elements in MDX, and prefixes them with the current theme's base — so a
-reader stays in whichever theme they are reading. The base is derived from the
-URL being rendered, which keeps the component self-contained.
+`<a>` elements in MDX, and prefixes them with the deploy's base path. Astro
+only rewrites the URLs it generates itself, so a hand-written root-absolute
+href 404s on a project site without this — a failure that is invisible locally
+at the root and total live, which is why a test fails any href in the output
+that is missing the base.
 
 MDX matters here: a plain `.md` file passes raw HTML straight through without
-element mapping, so links inside raw blocks would silently escape the theme.
+element mapping, so links inside raw blocks would silently lose the base path.
 
 ## Themes
 
@@ -270,7 +291,7 @@ career stages, each described as numbers — how many lobes, how far they push
 out, how big — so any two shapes interpolate cleanly without a path-morphing
 library. Facts come from `../inventory.md`.
 
-It is `client:visible`, so **5 of 45 pages ship any JavaScript** and the SVG
+It is `client:visible`, so **one deployed page ships any JavaScript** and the SVG
 renders server-side: the shape is there before React is, and without it. The
 stage buttons are hidden when JS is unavailable rather than offered dead, and
 the same chronology is on the page as text either way.
@@ -295,10 +316,11 @@ under Vite HMR and React dev mode the island behaves differently, which is a
 good way to waste an afternoon. That is why the suite uses its own port and
 never reuses a running server.
 
-What is covered: link integrity across all 45 pages (including that every
-one carries the base path), the JavaScript budget, one theme stylesheet per
-page, theme-scoped links in both directions, the theme token contract, the
-switcher, canonical URLs and `noindex` on the copies, the sitemap's contents,
+What is covered: that what deploys is one version of each page with no fixture
+and no switcher, link integrity across every built page (including that each
+carries the base path, and that nothing links into the fixture), the JavaScript
+budget, one theme stylesheet per page, the theme token contract, canonical
+URLs and `noindex`, the sitemap's contents,
 static accessibility checks, the theme contract (same words in the same order
 and the same heading outline in every theme, the declared colour scheme, and
 that element overrides actually reach the page), and the island (hydration,

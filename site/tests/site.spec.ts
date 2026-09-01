@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, rmSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 import { BASE } from '../site.config.mjs';
 
@@ -19,11 +20,44 @@ function pages(): string[] {
   return out.sort();
 }
 
-test('builds the curated site plus every theme', () => {
+test('the test build carries the site plus the theme fixture', () => {
+  // The suite runs against `build:matrix`, which adds every page in every
+  // theme under /t/ so the contract has something to compare against. What
+  // DEPLOYS is nine pages — see 'what deploys is one version of each page'.
   const all = pages();
   expect(all.length).toBe(45);
   expect(all).toContain('/index.html');
   expect(all).toContain('/t/buff/cases/cu-giving/index.html');
+});
+
+test('what deploys is one version of each page, and no fixture', () => {
+  // Builds the way the deploy does — no THEME_MATRIX — into a throwaway
+  // directory. This is the guarantee that the fixture cannot ship: not a grep
+  // over a workflow file, an actual production build.
+  const out = 'dist-deploy-check';
+  rmSync(out, { recursive: true, force: true });
+  execFileSync('npx', ['astro', 'build', '--outDir', out], {
+    env: { ...process.env, THEME_MATRIX: '' }, stdio: 'pipe',
+  });
+
+  const built: string[] = [];
+  const walk = (dir: string) => {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      const p = join(dir, e.name);
+      if (e.isDirectory()) walk(p);
+      else if (e.name.endsWith('.html')) built.push(p.slice(out.length));
+    }
+  };
+  walk(out);
+
+  expect(built.filter(p => p.startsWith('/t/')), 'the fixture leaked into the deploy build')
+    .toEqual([]);
+  expect(built.length, 'one version of each content page').toBe(contentFiles().length);
+  for (const p of built) {
+    expect(readFileSync(join(out, p.slice(1)), 'utf8'), `${p} still ships the theme switcher`)
+      .not.toContain('class="themes');
+  }
+  rmSync(out, { recursive: true, force: true });
 });
 
 test('every internal link resolves', () => {
@@ -73,26 +107,18 @@ test('each page loads exactly one theme stylesheet', () => {
   }
 });
 
-test('themed pages keep their links inside the theme', async ({ page }) => {
-  await page.goto('t/buff/problems/');
-  const hrefs = await page.locator('main a').evaluateAll(
-    els => els.map(e => e.getAttribute('href')!).filter(h => h.startsWith('/')));
-  expect(hrefs.length).toBeGreaterThan(0);
-  expect(hrefs.every(h => h.startsWith(`${BASE}/t/buff/`))).toBe(true);
-});
-
-test('the curated copy has no theme prefix in its links', async ({ page }) => {
-  await page.goto('problems/');
-  const hrefs = await page.locator('main a').evaluateAll(
-    els => els.map(e => e.getAttribute('href')!).filter(h => h.startsWith('/')));
-  expect(hrefs.some(h => h.startsWith(`${BASE}/t/`))).toBe(false);
-});
-
-test('the theme switcher offers every theme and marks the current one', async ({ page }) => {
-  await page.goto('t/federal/about/');
-  const links = page.locator('.themes a');
-  await expect(links).toHaveCount(5);            // Curated + 4 themes
-  await expect(page.locator('.themes a[aria-current="true"]')).toHaveText('federal');
+test('nothing links into the theme fixture', () => {
+  // A page has one address. Even in the matrix build, no link may point at a
+  // /t/ URL — those pages do not exist on the deployed site, so a link to one
+  // is a 404 waiting to ship.
+  const leaks: string[] = [];
+  for (const page of pages()) {
+    const html = readFileSync(join(DIST, page.slice(1)), 'utf8');
+    for (const m of html.matchAll(/href="([^"]*)"/g)) {
+      if (m[1].startsWith(`${BASE}/t/`)) leaks.push(`${page} -> ${m[1]}`);
+    }
+  }
+  expect(leaks, `links into the fixture:\n${leaks.join('\n')}`).toEqual([]);
 });
 
 test('every theme defines the tokens base.css requires', () => {

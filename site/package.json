@@ -7,8 +7,9 @@
     "dev:stop": "astro dev stop",
     "dev:status": "astro dev status",
     "dev:logs": "astro dev logs --follow",
-    "build": "astro build",
-    "serve": "astro build && node scripts/serve.mjs dist 4321",
+    "build": "rm -rf dist && astro build",
+    "build:matrix": "rm -rf dist && THEME_MATRIX=1 astro build",
+    "serve": "npm run build && node scripts/serve.mjs dist 4321",
     "check": "astro check",
     "test": "playwright test",
     "test:ui": "playwright test --ui"

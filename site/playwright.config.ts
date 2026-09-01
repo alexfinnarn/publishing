@@ -16,8 +16,13 @@ export default defineConfig({
   /* Its own port, never reused: hitting a running `astro dev` instead of the
      build gives different behaviour (HMR, React dev mode) and cost me an
      afternoon of chasing phantom island failures. */
+  /* THEME_MATRIX builds every page in every theme under /t/. Those pages are
+     a TEST FIXTURE, not part of the site: the contract that a theme may change
+     the tags but never the words or their order is only checkable by rendering
+     the same content more than one way. The deploy does not set it, so what
+     ships is one version per page. */
   webServer: {
-    command: 'npx astro build && node scripts/serve.mjs dist 4322',
+    command: 'npm run build:matrix && node scripts/serve.mjs dist 4322',
     url: `http://localhost:4322${BASE}/`,
     reuseExistingServer: false,
     timeout: 120_000,

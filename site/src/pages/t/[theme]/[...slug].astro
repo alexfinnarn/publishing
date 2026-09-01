@@ -1,12 +1,20 @@
 ---
-/** The whole site in one theme, for every theme. Same content entries as the
- *  curated route — the only difference is which stylesheet and chrome the
- *  layout picks, which is the point. */
+/** A TEST FIXTURE, not part of the site.
+ *
+ *  The site ships one version of each page, in the theme its frontmatter
+ *  names. But the contract that holds the primitives together — a theme may
+ *  choose the tags, never the words or their order — can only be checked by
+ *  rendering the same content more than one way. So these exist, and only
+ *  when THEME_MATRIX is set: the test suite builds with it, the deploy does
+ *  not. `npm run build` produces one version per page.
+ *
+ *  Keep the property, drop the URLs. */
 import { getCollection, render } from 'astro:content';
 import Page from '../../../layouts/Page.astro';
 import { THEME_NAMES, elementsFor } from '../../../lib/themes';
 
 export async function getStaticPaths() {
+  if (!process.env.THEME_MATRIX) return [];
   // index has its own route; Astro normalizes `/x/index` to `/x/`,
   // which a catch-all param cannot match.
   const pages = (await getCollection('pages')).filter(p => p.id !== 'index');
