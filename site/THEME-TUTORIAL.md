@@ -1,18 +1,37 @@
 # Build your first theme
 
+This walkthrough covers the existing site's presentation implementation.
+For the broader definition of a theme—including composition and language—and
+policies that can be applied without a framework, start with
+[themes as communication policies](../themes/README.md). This tutorial's
+fixed-content exercise is only one part of that larger concept.
+
 This is the human version of the process used in the
 [first broadsheet exercise](src/themes/broadsheet/EXERCISE.md): write a small
 brief, make one visible change, inspect it, and revise your understanding.
 You do not need an agent, a token compiler, or a new component library.
 
-The walkthrough uses `fieldnotes` as an example name and starts from `paper`.
-It keeps existing content and component choices so you can learn the visual
-layer first. The example is not installed in this repository; the commands
-below are steps for you to perform. Pick another name if it already exists.
+**`fieldnotes` is an invented theme name for this tutorial.** It is not a tool,
+framework, or existing theme. The name suggests the field-journal design we
+will try below. `paper`, by contrast, is an existing theme that we will copy
+as a starting point.
+
+You can follow along using `fieldnotes`, or choose your own lowercase name
+such as `journal`. If you choose another name, replace every `fieldnotes` in
+the commands, filenames, registry entry, and preview URLs with that name;
+also rename the `fieldnotesBrief` variable consistently.
+
+The example is not installed in this repository; the commands below are
+steps for you to perform. Check that your chosen name is unused first.
+The walkthrough keeps existing content and component choices so you can
+learn the visual layer first.
 
 ## 1. Choose a reading experience
 
-Before opening CSS, write three sentences:
+Before creating or editing any theme files, write three sentences in a note.
+You will use these to start your DESIGN.md brief in step 2. The stylesheet
+you will eventually edit is `site/public/styles/fieldnotes.css`, also created
+in step 2; there is no file or directory named “CSS” to open.
 
 1. Who is reading, and what are they trying to do?
 2. What concrete reference helps that experience?

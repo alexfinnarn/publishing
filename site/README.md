@@ -136,6 +136,10 @@ element mapping, so links inside raw blocks would silently lose the base path.
 
 ## Themes
 
+The broader [theme definition and application policies](../themes/README.md)
+live outside the site. The implementation described below currently handles
+only part of that communication model.
+
 For a hands-on walkthrough, start with [Build your first theme](THEME-TUTORIAL.md).
 It follows the same brief, implementation, and verification loop used by an agent.
 

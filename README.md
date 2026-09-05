@@ -26,8 +26,9 @@ replacing the vocabulary is the method, not a failure mode. Do not quote a
 file back at me as a reason not to try something. If a doc conflicts with
 what I want now, the doc is wrong — change the doc.
 
-Words that mean something specific here: none yet. Essay, work, page, site
-are ordinary English until something actually forces a distinction.
+The provisional [theme concepts and policies](themes/README.md) define theme,
+material, communication brief, and publication for the next experiment.
+Other terms remain ordinary English until something forces a distinction.
 
 ## Layout
 
@@ -37,6 +38,7 @@ are ordinary English until something actually forces a distinction.
 | `site/` | The consulting website. Code, plus a short note on the two serving rules |
 | `writing/` | Drafts. Long-form thinking that has not been published yet |
 | `references/` | Lists and pointers that came from somewhere else |
+| `themes/` | Framework-independent communication policies and the process for applying them |
 | `books/` | Empty until an outline has an order someone would read |
 
 ## Working record
