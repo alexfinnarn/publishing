@@ -136,6 +136,15 @@ element mapping, so links inside raw blocks would silently lose the base path.
 
 ## Themes
 
+For a hands-on walkthrough, start with [Build your first theme](THEME-TUTORIAL.md).
+It follows the same brief, implementation, and verification loop used by an agent.
+
+Theme authoring is being exercised with a [provisional worksheet](src/themes/DESIGN.template.md).
+The first [broadsheet brief](src/themes/broadsheet/DESIGN.md) and
+[exercise record](src/themes/broadsheet/EXERCISE.md) distinguish intended design,
+observed behavior, and one verified extension. These are authoring documents,
+not additional build inputs or a required schema for every theme.
+
 A theme is a directory, `src/themes/<name>/`, plus a stylesheet at
 `public/styles/<name>.css`. Only two files are required:
 

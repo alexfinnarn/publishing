@@ -26,12 +26,19 @@ body { line-height: 1.55; }
 .utility { background: var(--ink); color: var(--paper); }
 .utility > .inner {
   grid-column: wide;
+  align-items: center;
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--size-3);
   padding-block: var(--size-2);
   font-size: var(--font-size-0); text-transform: uppercase; letter-spacing: .14em;
 }
 .utility a { color: var(--paper); text-decoration: none; }
 .utility a:hover { color: var(--accent-dim); }
+
+/* Keep the compact type, but give header actions room to tap. */
+.utility a, .masthead .wordmark, .masthead nav a {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-inline-size: 2.75rem; min-block-size: 2.75rem;
+}
 
 /* masthead: centred, double rule below, dateline under that */
 .masthead { border-block-end: 4px double var(--ink); }
