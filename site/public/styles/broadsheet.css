@@ -75,6 +75,19 @@ h2 {
   margin-block: var(--size-8) var(--size-4);
 }
 
+/* Why this theme ships its own <h2> (src/themes/broadsheet/Heading.astro):
+   the <h2> is a grid child, so it stretches to its column and anything drawn
+   on it runs the full width however short the headline is. The span
+   shrink-wraps the words, so the spot-colour rule stops at the last one and
+   clones onto each line when the headline wraps. No selector can do this to
+   the <h2> itself. */
+.hed-text {
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  border-block-end: 2px solid var(--accent);
+  padding-block-end: 3px;
+}
+
 /* cards read as front-page columns */
 .problem {
   background: none; border: 0; border-radius: 0; padding: 0;

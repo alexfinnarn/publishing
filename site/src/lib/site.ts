@@ -1,7 +1,9 @@
-/** Where the per-theme copies of the site live, below the site root.
- *  NOTE: this must match the directory name under `src/pages/`. Changing it
- *  means renaming `src/pages/t/` to match — Astro route directories are
- *  static. `scripts/check-links.mjs` asserts the two agree. */
+/** Where the THEME_MATRIX test fixture renders each page in every theme.
+ *
+ *  Not part of the site: the deploy builds one version of each page. These
+ *  exist so the contract — a theme may choose the tags, never the words or
+ *  their order — has something to compare against. Must match the directory
+ *  name under `src/pages/`, since Astro route directories are static. */
 export const THEME_PREFIX = 't';
 
 export const NAV = [
@@ -22,11 +24,8 @@ export const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 /** A site-root path ('/about/'), as an href the browser can follow. */
 export const withBase = (path: string) => `${BASE}${path}`;
 
-/** Base path for a page rendered in a theme. Undefined is the curated copy. */
-export const themeBase = (theme?: string) =>
-  theme ? withBase(`/${THEME_PREFIX}/${theme}`) : BASE;
-
-/** The theme a URL is being rendered in, or undefined for the curated copy.
- *  Derived from the path so a component does not have to be told. */
+/** The theme a fixture URL is being rendered in, or undefined for a real page
+ *  (whose theme comes from its own frontmatter). Derived from the path so a
+ *  primitive deep inside MDX does not have to be told. */
 export const themeOf = (pathname: string) =>
   pathname.slice(BASE.length).match(new RegExp(`^/${THEME_PREFIX}/([^/]+)/`))?.[1];

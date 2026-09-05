@@ -1,0 +1,33 @@
+---
+/** chronology / comparable-rows — a table.
+ *
+ *  The claim: these are the same kind of thing, described the same way, so a
+ *  reader may read down a column and compare. That is a stronger claim than
+ *  either list makes, and it is the one that earns real column headers.
+ *
+ *  The caption and the headers are words the THEME supplies, not words the
+ *  content wrote — so they carry data-theme-copy and are excluded from the
+ *  content-equivalence contract. A theme may add words; it must say they are
+ *  its own. */
+import type { Entry } from './types';
+const { entries } = Astro.props as { entries: Entry[] };
+---
+<table class="chronology chronology-comparable-rows">
+  <caption data-theme-copy>Twelve years, in the order they happened</caption>
+  <thead>
+    <tr>
+      <th scope="col" data-theme-copy>When</th>
+      <th scope="col" data-theme-copy>Where</th>
+      <th scope="col" data-theme-copy>What</th>
+    </tr>
+  </thead>
+  <tbody>
+    {entries.map(e => (
+      <tr data-content-item>
+        <th scope="row"><time>{e.when}</time></th>
+        <td><strong>{e.where}</strong>{e.role && <> — {e.role}</>}</td>
+        <td>{e.what}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>

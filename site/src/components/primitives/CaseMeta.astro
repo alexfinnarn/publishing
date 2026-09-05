@@ -1,0 +1,20 @@
+---
+/** CaseMeta — the primitive. Content hands it data and says nothing about
+ *  markup; the theme's `render` map says what the data IS, and one of the
+ *  variants makes that claim in HTML. Content never imports this — it
+ *  arrives through the theme's component map. */
+import { resolveVariant } from './resolve';
+import FieldPairs from './case-meta/FieldPairs.astro';
+import InlineAttribution from './case-meta/InlineAttribution.astro';
+
+const { items, course = 0 } = Astro.props;
+const variant = await resolveVariant(Astro.url.pathname, 'case-meta', course);
+
+const BY_VARIANT = {
+  'field-pairs': FieldPairs,
+  'inline-attribution': InlineAttribution,
+} as const;
+
+const Variant = BY_VARIANT[variant as keyof typeof BY_VARIANT];
+---
+<Variant items={items} />

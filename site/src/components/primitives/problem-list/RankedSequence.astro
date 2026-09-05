@@ -1,0 +1,18 @@
+---
+/** problems / ranked-sequence — an ordered list.
+ *  The claim: read these in this order, because the order is an argument.
+ *  Announced with a count and a position, which neither other variant gives. */
+import Link from '../../Link.astro';
+import type { Problem } from '../types';
+const { items } = Astro.props as { items: Problem[] };
+---
+<ol class="problems problem-list-ranked-sequence wide">
+  {items.map(p => (
+    <li class="problem" data-content-item>
+      <h3>{p.title}</h3>
+      <p>{p.blurb}</p>
+      <p class="evidence">{p.evidence}</p>
+      <Link class="go" href={p.href}>{p.cta}</Link>
+    </li>
+  ))}
+</ol>

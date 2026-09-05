@@ -1,0 +1,17 @@
+---
+/** cases / annotated-index — a description list.
+ *  The claim: the context belongs to the case rather than decorating it, so
+ *  the link is a term and the engagement is its description. Assistive tech
+ *  pairs them instead of reading one run-on link. */
+import Link from '../../Link.astro';
+import type { CaseRef } from '../types';
+const { items } = Astro.props as { items: CaseRef[] };
+---
+<dl class="cases case-list-annotated-index">
+  {items.map(c => (
+    <div class="entry" data-content-item>
+      <dt><Link class="case-link" href={c.href}>{c.title}</Link></dt>
+      <dd>{c.context}</dd>
+    </div>
+  ))}
+</dl>

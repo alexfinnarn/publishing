@@ -1,0 +1,32 @@
+---
+/** problems / lead-and-supporting — an article, then a list of the rest.
+ *
+ *  The claim a front page makes: the first one is the story, the others hang
+ *  off it. Announced differently from a flat list — assistive tech reaches an
+ *  article region, then a list of three, rather than a list of four.
+ *
+ *  DOM order is untouched and the heading level is the same for all four, so
+ *  the outline the content wrote still stands. */
+import Link from '../../Link.astro';
+import type { Problem } from '../types';
+const { items } = Astro.props as { items: Problem[] };
+const [lead, ...rest] = items;
+---
+<div class="problems problem-list-lead-and-supporting wide">
+  <article class="problem problem-lead" data-content-item>
+    <h3>{lead.title}</h3>
+    <p>{lead.blurb}</p>
+    <p class="evidence">{lead.evidence}</p>
+    <Link class="go" href={lead.href}>{lead.cta}</Link>
+  </article>
+  <ul class="problem-support">
+    {rest.map(p => (
+      <li class="problem" data-content-item>
+        <h3>{p.title}</h3>
+        <p>{p.blurb}</p>
+        <p class="evidence">{p.evidence}</p>
+        <Link class="go" href={p.href}>{p.cta}</Link>
+      </li>
+    ))}
+  </ul>
+</div>

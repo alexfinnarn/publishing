@@ -1,0 +1,28 @@
+---
+/** Chronology — the primitive. Content hands it entries as data and says
+ *  nothing about markup; the theme's `render` map says what those entries
+ *  are, and one of the variant components makes that claim in HTML.
+ *
+ *  Content never imports this. It arrives through the theme's component map
+ *  (`elementsFor` in src/lib/themes.ts), which is what keeps the MDX free of
+ *  any knowledge that themes exist. */
+import { resolveVariant } from './resolve';
+import type { Entry } from './chronology/types';
+
+import DateKeyed from './chronology/DateKeyed.astro';
+import Sequence from './chronology/Sequence.astro';
+import ComparableRows from './chronology/ComparableRows.astro';
+
+const { entries, course = 0 } = Astro.props as { entries: Entry[]; course?: number };
+
+const variant = await resolveVariant(Astro.url.pathname, 'chronology', course);
+
+const BY_VARIANT = {
+  'date-keyed': DateKeyed,
+  'sequence': Sequence,
+  'comparable-rows': ComparableRows,
+} as const;
+
+const Variant = BY_VARIANT[variant as keyof typeof BY_VARIANT];
+---
+<Variant entries={entries} />

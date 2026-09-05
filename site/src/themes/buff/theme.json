@@ -1,7 +1,15 @@
 {
   "label": "buff",
+  "scheme": "light",
   "design": "University of Colorado palette — CU gold (#CFB87C) on black and white. Gold is structural, not decorative: it draws the rules, the meta bar, and the callout edge. Black section heads, generous white. Restrained; it should read as institutional, not as spirit wear.",
   "language": "Institutional and plain. Name the stakes in money or people, not adjectives. Higher-ed readers are sceptical of vendor voice — describe what happened, let it land.",
   "use_for": "University of Colorado case studies.",
-  "note": "Evokes the client's palette on a case study about their work. Does not use their marks, seal, or wordmark, and the page carries Alex's own masthead throughout."
+  "render": {
+    "chronology": "comparable-rows",
+    "problems": "ranked-sequence",
+    "posts": "date-keyed",
+    "cases": "annotated-index",
+    "case-meta": "field-pairs"
+  },
+  "note": "Evokes the client's palette on a case study about their work. Does not use their marks, seal, or wordmark, and the page carries Alex's own masthead throughout. Single-scheme on purpose. CU gold and black is an institutional palette with no dark variant, and inventing one would be inventing the client."
 }

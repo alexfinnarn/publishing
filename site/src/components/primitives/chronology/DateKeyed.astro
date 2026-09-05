@@ -1,0 +1,23 @@
+---
+/** chronology / date-keyed — a description list.
+ *
+ *  The claim: each span of time is a key, and what happened in it is that
+ *  key's description. A reader can look things up by when. Announced as a
+ *  definition list, so assistive tech pairs every date with its entry.
+ *
+ *  The <div> wrapper is valid inside <dl> and keeps the dt/dd pairing intact
+ *  while giving the grid something to place. */
+import type { Entry } from './types';
+const { entries } = Astro.props as { entries: Entry[] };
+---
+<dl class="chronology chronology-date-keyed">
+  {entries.map(e => (
+    <div class="entry" data-content-item>
+      <dt><time>{e.when}</time></dt>
+      <dd>
+        <strong>{e.where}</strong>{e.role && <> — {e.role}</>}
+        <span>{e.what}</span>
+      </dd>
+    </div>
+  ))}
+</dl>

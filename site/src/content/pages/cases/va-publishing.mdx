@@ -6,6 +6,7 @@ title: "Accelerated publishing at the VA"
 dek: "A federal content platform where getting a change in front of veterans was slower than deciding to make it. The fix was decoupling — but the reason it worked was workflow, not architecture."
 headTitle: "Accelerated publishing at the VA — Alex Finnarn"
 description: "Decoupled Drupal, JSON:API, and Next/React so editors stopped waiting on a deploy."
+courses: [case-meta]
 order: 20
 ---
 
@@ -19,11 +20,11 @@ import Link from '../../../components/Link.astro';
        - how many editors were affected
      Do not add a metric you cannot source. */}
 
-<div class="case-meta">
-  <div><span class="k">Role</span> Senior Backend Drupal Engineer</div>
-  <div><span class="k">Client</span> U.S. Dept. of Veterans Affairs</div>
-  <div><span class="k">Stack</span> Drupal, JSON:API, Next.js / React</div>
-</div>
+<CaseMeta items={[
+  { k: 'Role', v: 'Senior Backend Drupal Engineer' },
+  { k: 'Client', v: 'U.S. Dept. of Veterans Affairs' },
+  { k: 'Stack', v: 'Drupal, JSON:API, Next.js / React' },
+]} />
 
 ## The situation
 

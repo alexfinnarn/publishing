@@ -126,6 +126,17 @@ a.email { font-size: var(--step-1); font-weight: var(--font-weight-6); }
   gap: var(--size-5); margin-block: var(--size-5) var(--size-6);
   list-style: none; padding: 0;
 }
+/* ranked-sequence keeps its markers: the count is the claim, so it shows */
+.problem-list-ranked-sequence { list-style: decimal; padding-inline-start: var(--size-6); }
+.problem-list-ranked-sequence > .problem { grid-row: auto; }
+/* lead-and-supporting: one story, then the rest under it */
+.problem-list-lead-and-supporting { grid-template-columns: minmax(0, 1fr); }
+.problem-list-lead-and-supporting .problem-lead { grid-row: auto; }
+.problem-list-lead-and-supporting .problem-support {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+  gap: var(--size-5); list-style: none; margin: 0; padding: 0;
+}
+.problem-list-lead-and-supporting .problem-support .problem { grid-row: span 4; grid-template-rows: subgrid; }
 .problem {
   display: grid; grid-row: span 4; grid-template-rows: subgrid; gap: var(--size-2);
   background: var(--paper-warm); border: 1px solid var(--rule);
@@ -159,15 +170,76 @@ a.email { font-size: var(--step-1); font-weight: var(--font-weight-6); }
 .case-link strong { display: block; color: var(--ink); margin-block-end: var(--size-1); }
 .case-link span { font-size: var(--font-size-0); color: var(--ink-soft); }
 
-.history { list-style: none; padding: 0; margin: 0; }
-.history li {
+/* annotated-index: the context is the link's description, not part of it */
+.case-list-annotated-index .entry {
+  padding: var(--size-4); border: 1px solid var(--rule);
+  border-radius: var(--radius-2); background: var(--paper-warm);
+}
+.case-list-annotated-index dt .case-link {
+  display: inline; padding: 0; border: 0; background: none;
+  color: var(--ink); font-weight: var(--font-weight-6);
+}
+.case-list-annotated-index dd {
+  margin: var(--size-1) 0 0; font-size: var(--font-size-0); color: var(--ink-soft);
+}
+
+/* ---------- chronology (primitive) ----------
+   Three variants, three different claims about the same seven entries. The
+   structure is theirs; this file only sizes and rules them. Placement is here
+   rather than in the content, so a theme can move it without the MDX
+   knowing. */
+.grid > .chronology { grid-column: wide; }
+.chronology time { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* date-keyed: a definition list. Date is the key, so it leads its own column. */
+.chronology-date-keyed { margin: 0; }
+.chronology-date-keyed .entry {
   display: grid; grid-template-columns: 9rem 1fr; gap: var(--size-2) var(--size-4);
   padding-block: var(--size-3); border-block-start: 1px solid var(--rule);
 }
-.history li:last-child { border-block-end: 1px solid var(--rule); }
-.history .when { font-size: var(--font-size-0); color: var(--ink-soft); font-variant-numeric: tabular-nums; }
-.history .what strong { display: block; }
-.history .what span { color: var(--ink-soft); font-size: var(--font-size-1); }
+.chronology-date-keyed .entry:last-child { border-block-end: 1px solid var(--rule); }
+.chronology-date-keyed dt { font-size: var(--font-size-0); color: var(--ink-soft); }
+.chronology-date-keyed dd { margin: 0; }
+.chronology-date-keyed dd strong { display: block; }
+.chronology-date-keyed dd > span { color: var(--ink-soft); font-size: var(--font-size-1); }
+
+/* sequence: an ordered list. The count is the point, so the markers stay. */
+.chronology-sequence {
+  margin: 0; padding-inline-start: var(--size-6);
+}
+.chronology-sequence li {
+  padding-block: var(--size-3); border-block-start: 1px solid var(--rule);
+}
+.chronology-sequence li:last-child { border-block-end: 1px solid var(--rule); }
+.chronology-sequence li::marker { color: var(--ink-soft); font-size: var(--font-size-0); }
+.chronology-sequence time { font-size: var(--font-size-0); color: var(--ink-soft); }
+.chronology-sequence .what strong { display: block; }
+.chronology-sequence .what > span { color: var(--ink-soft); font-size: var(--font-size-1); }
+
+/* comparable-rows: a table, so columns line up and can be read down. */
+.chronology-comparable-rows {
+  inline-size: 100%; border-collapse: collapse; text-align: start;
+}
+.chronology-comparable-rows caption {
+  text-align: start; color: var(--ink-soft); font-size: var(--font-size-0);
+  text-transform: uppercase; letter-spacing: var(--font-letterspacing-2);
+  padding-block-end: var(--size-2);
+}
+.chronology-comparable-rows th,
+.chronology-comparable-rows td {
+  text-align: start; vertical-align: baseline;
+  padding: var(--size-3) var(--size-4) var(--size-3) 0;
+  border-block-start: 1px solid var(--rule);
+}
+.chronology-comparable-rows thead th {
+  font-size: var(--font-size-0); text-transform: uppercase;
+  letter-spacing: var(--font-letterspacing-2); color: var(--ink-soft);
+  border-block-start: 0; border-block-end: 2px solid var(--ink);
+}
+.chronology-comparable-rows tbody th { font-weight: var(--font-weight-4); color: var(--ink-soft); }
+.chronology-comparable-rows td:last-child { color: var(--ink-soft); font-size: var(--font-size-1); }
+.chronology-comparable-rows tbody tr:last-child th,
+.chronology-comparable-rows tbody tr:last-child td { border-block-end: 1px solid var(--rule); }
 
 .posts { list-style: none; margin: 0 0 var(--size-5); padding: 0; }
 .posts li {
@@ -176,6 +248,18 @@ a.email { font-size: var(--step-1); font-weight: var(--font-weight-6); }
 }
 .posts li:last-child { border-block-end: 1px solid var(--rule); }
 .posts time { font-size: var(--font-size-0); color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+
+/* date-keyed: the date is the key, so it leads its own column */
+.post-list-date-keyed { margin: 0 0 var(--size-5); }
+.post-list-date-keyed .entry {
+  display: grid; grid-template-columns: 7rem 1fr; gap: var(--size-1) var(--size-4);
+  align-items: baseline; padding-block: var(--size-3);
+  border-block-start: 1px solid var(--rule);
+}
+.post-list-date-keyed .entry:last-child { border-block-end: 1px solid var(--rule); }
+.post-list-date-keyed dd { margin: 0; }
+/* title-led: the title leads and the date trails as context */
+.post-list-title-led li { grid-template-columns: 1fr auto; }
 
 .case-meta {
   display: flex; flex-wrap: wrap; gap: var(--size-2) var(--size-5);
@@ -187,6 +271,14 @@ a.email { font-size: var(--step-1); font-weight: var(--font-weight-6); }
   font-size: var(--font-size-0); text-transform: uppercase;
   letter-spacing: var(--font-letterspacing-2); color: var(--ink-soft);
 }
+.case-meta-field-pairs dt { font-weight: inherit; }
+.case-meta-field-pairs dd { margin: 0; }
+/* inline-attribution: prose, so it reads as a sentence rather than a rack */
+.case-meta-inline-attribution {
+  display: block; color: var(--ink-soft);
+  border-block: 1px solid var(--rule); padding-block: var(--size-4);
+}
+.case-meta-inline-attribution .k { margin-inline-end: var(--size-1); }
 
 .callout {
   background: var(--paper-warm); border-inline-start: 3px solid var(--accent);
@@ -203,7 +295,10 @@ a.email { font-size: var(--step-1); font-weight: var(--font-weight-6); }
 }
 
 @media (width < 34rem) {
-  .history li, .posts li { grid-template-columns: 1fr; }
+  .chronology-date-keyed .entry, .posts li,
+  .post-list-date-keyed .entry { grid-template-columns: 1fr; }
+  /* a table cannot reflow, so let it scroll rather than crush the columns */
+  .chronology-comparable-rows { display: block; overflow-x: auto; }
 }
 
 /* ---------- theme switcher ---------- */

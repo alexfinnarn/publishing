@@ -4,6 +4,7 @@ nav: problems
 title: "Problems I solve"
 dek: "Four shapes of mess. Each one is something I have actually been inside, with the engagement named. If yours looks like one of these, the case studies go deeper."
 description: "Four classes of mess I am good at, with the engagements that prove it."
+courses: [cases, cases, cases, chronology]
 order: 2
 ---
 
@@ -52,9 +53,7 @@ that if half of it fails, the other half does not care.
 - Separated content management from payment processing on a platform moving ~$5.4M a year, using domain-driven design (University of Colorado)
 - Drupal-to-Drupal migration on the Migrate API across a federal estate (CivicActions)
 
-<ul class="cases">
-  <li><Link class="case-link" href="/cases/cu-giving/"><strong>Splitting a giving platform from its CMS</strong><span>University of Colorado · 2020–2022</span></Link></li>
-</ul>
+<CaseList items={[{ title: 'Splitting a giving platform from its CMS', href: '/cases/cu-giving/', context: 'University of Colorado · 2020–2022' }]} />
 
 </section>
 
@@ -73,9 +72,7 @@ the loop between an editor deciding something and a reader seeing it.
 - Accelerated publishing for the VA: decoupled Drupal, JSON:API, and a Next/React front end (CivicActions)
 - Upgraded an Ionic/Angular Medicare mobile app under a hard deadline (CivicActions)
 
-<ul class="cases">
-  <li><Link class="case-link" href="/cases/va-publishing/"><strong>Accelerated publishing at the VA</strong><span>CivicActions · 2022–2024</span></Link></li>
-</ul>
+<CaseList items={[{ title: 'Accelerated publishing at the VA', href: '/cases/va-publishing/', context: 'CivicActions · 2022–2024' }]} />
 
 </section>
 
@@ -97,9 +94,7 @@ is usually the highest-leverage thing available.
 - Cypress and Jenkins liaison between development and QA (CivicActions)
 - Kanban and Theory of Constraints for flow; Architectural Decision Records so the reasoning survives the person
 
-<ul class="cases">
-  <li><Link class="case-link" href="/cases/cu-tooling/"><strong>Tooling for 1,000+ sites</strong><span>University of Colorado · 2015–2019</span></Link></li>
-</ul>
+<CaseList items={[{ title: 'Tooling for 1,000+ sites', href: '/cases/cu-tooling/', context: 'University of Colorado · 2015–2019' }]} />
 
 </section>
 
@@ -107,14 +102,23 @@ is usually the highest-leverage thing available.
 
 The full chronology, if you would rather read it that way.
 
-<ul class="history wide">
-  <li><span class="when">2022–2024</span><span class="what"><strong>CivicActions</strong> — Senior Backend Drupal Engineer <span>Federal content platforms for the VA and CMS. Decoupled publishing, ~15 Drupal sites, Migrate API work, Ionic/Angular mobile, Cypress/Jenkins, accessibility (edX certificate). Speaker at three regional conferences on test automation and frontend.</span></span></li>
-  <li><span class="when">2020–2022</span><span class="what"><strong>University of Colorado</strong> — online giving platform <span>~$5.4M/year. Led the domain-driven migration separating content management from payment processing. Kanban, Theory of Constraints, Architectural Decision Records.</span></span></li>
-  <li><span class="when">2015–2019</span><span class="what"><strong>University of Colorado</strong> — platform and tooling <span>Vue UI to 1,000+ sites. CI across 50+ repositories. Shared local environments (Vagrant, then Docker).</span></span></li>
-  <li><span class="when">2019</span><span class="what"><strong>Highlights for Children</strong> <span>Drupal 7 family of sites; start of the Drupal 8 platform.</span></span></li>
-  <li><span class="when">2014–2015</span><span class="what"><strong>Coplex</strong> — contractor to maintenance team lead <span>15–20 clients. Sold follow-on performance and SEO packages.</span></span></li>
-  <li><span class="when">2013–2014</span><span class="what"><strong>Sogeti</strong> — Ethicon (Johnson &amp; Johnson) <span>Drupal 7 multisite; coordinated an offshore team of four.</span></span></li>
-  <li><span class="when">2009</span><span class="what"><strong>Ohio State University</strong> <span>BS, Psychology. More relevant to content modeling than it sounds.</span></span></li>
-</ul>
+export const chronology = [
+  { when: '2022–2024', where: 'CivicActions', role: 'Senior Backend Drupal Engineer',
+    what: 'Federal content platforms for the VA and CMS. Decoupled publishing, ~15 Drupal sites, Migrate API work, Ionic/Angular mobile, Cypress/Jenkins, accessibility (edX certificate). Speaker at three regional conferences on test automation and frontend.' },
+  { when: '2020–2022', where: 'University of Colorado', role: 'online giving platform',
+    what: '~$5.4M/year. Led the domain-driven migration separating content management from payment processing. Kanban, Theory of Constraints, Architectural Decision Records.' },
+  { when: '2015–2019', where: 'University of Colorado', role: 'platform and tooling',
+    what: 'Vue UI to 1,000+ sites. CI across 50+ repositories. Shared local environments (Vagrant, then Docker).' },
+  { when: '2019', where: 'Highlights for Children',
+    what: 'Drupal 7 family of sites; start of the Drupal 8 platform.' },
+  { when: '2014–2015', where: 'Coplex', role: 'contractor to maintenance team lead',
+    what: '15–20 clients. Sold follow-on performance and SEO packages.' },
+  { when: '2013–2014', where: 'Sogeti', role: 'Ethicon (Johnson & Johnson)',
+    what: 'Drupal 7 multisite; coordinated an offshore team of four.' },
+  { when: '2009', where: 'Ohio State University',
+    what: 'BS, Psychology. More relevant to content modeling than it sounds.' },
+];
+
+<Chronology entries={chronology} />
 
 <p><Link class="more" href="/contact/">Recognize one of these? →</Link></p>

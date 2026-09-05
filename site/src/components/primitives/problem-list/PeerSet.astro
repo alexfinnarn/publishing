@@ -1,0 +1,17 @@
+---
+/** problems / peer-set — an unordered list.
+ *  The claim: four alternatives of equal standing. No headline among them. */
+import Link from '../../Link.astro';
+import type { Problem } from '../types';
+const { items } = Astro.props as { items: Problem[] };
+---
+<ul class="problems problem-list-peer-set wide">
+  {items.map(p => (
+    <li class="problem" data-content-item>
+      <h3>{p.title}</h3>
+      <p>{p.blurb}</p>
+      <p class="evidence">{p.evidence}</p>
+      <Link class="go" href={p.href}>{p.cta}</Link>
+    </li>
+  ))}
+</ul>

@@ -6,6 +6,7 @@ title: "Tooling for 1,000+ sites"
 dek: "A distributed team, more than fifty repositories, and over a thousand sites running the same platform. The hardest bug to fix is the one only one person can reproduce."
 headTitle: "Tooling for 1,000+ sites — Alex Finnarn"
 description: "CI across 50+ repositories and local environments a distributed team could actually share."
+courses: [case-meta]
 order: 20
 ---
 
@@ -16,11 +17,11 @@ import Link from '../../../components/Link.astro';
      before/after, team size, whether Vagrant→Docker was a migration you led.
      No invented metrics. */}
 
-<div class="case-meta">
-  <div><span class="k">Scale</span> 1,000+ sites · 50+ repositories</div>
-  <div><span class="k">Stack</span> Drupal, Vue, Vagrant → Docker</div>
-  <div><span class="k">Focus</span> CI and developer environment</div>
-</div>
+<CaseMeta items={[
+  { k: 'Scale', v: '1,000+ sites · 50+ repositories' },
+  { k: 'Stack', v: 'Drupal, Vue, Vagrant → Docker' },
+  { k: 'Focus', v: 'CI and developer environment' },
+]} />
 
 ## The situation
 

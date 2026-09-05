@@ -1,7 +1,7 @@
 ---
 import { getEntry, render } from 'astro:content';
-import Link from '../components/Link.astro';
 import Page from '../layouts/Page.astro';
+import { elementsFor } from '../lib/themes';
 
 const entry = await getEntry('pages', 'index');
 if (!entry) throw new Error('content/pages/index.mdx is missing');
@@ -10,5 +10,5 @@ const d = entry.data;
 ---
 <Page theme={d.theme} slug="index" title={d.title} headTitle={d.headTitle}
       description={d.description} nav={d.nav} kicker={d.kicker} dek={d.dek}>
-  <Content components={{ a: Link }} />
+  <Content components={elementsFor(d.theme)} />
 </Page>

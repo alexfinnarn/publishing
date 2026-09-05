@@ -1,8 +1,8 @@
 ---
 /** The curated site. Each page in the theme its frontmatter names. */
 import { getCollection, render } from 'astro:content';
-import Link from '../components/Link.astro';
 import Page from '../layouts/Page.astro';
+import { elementsFor } from '../lib/themes';
 
 export async function getStaticPaths() {
   // index has its own route; Astro normalizes `/x/index` to `/x/`,
@@ -20,5 +20,5 @@ const d = entry.data;
 ---
 <Page theme={d.theme} slug={entry.id} title={d.title} headTitle={d.headTitle}
       description={d.description} nav={d.nav} kicker={d.kicker} dek={d.dek}>
-  <Content components={{ a: Link }} />
+  <Content components={elementsFor(d.theme)} />
 </Page>

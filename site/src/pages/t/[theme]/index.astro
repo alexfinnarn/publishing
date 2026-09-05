@@ -1,10 +1,11 @@
 ---
 import { getEntry, render } from 'astro:content';
-import Link from '../../../components/Link.astro';
 import Page from '../../../layouts/Page.astro';
-import { THEME_NAMES } from '../../../lib/themes';
+import { THEME_NAMES, elementsFor } from '../../../lib/themes';
 
+/** A test fixture. See the sibling route: built only under THEME_MATRIX. */
 export async function getStaticPaths() {
+  if (!process.env.THEME_MATRIX) return [];
   return THEME_NAMES.map(theme => ({ params: { theme }, props: { theme } }));
 }
 
@@ -17,5 +18,5 @@ const d = entry.data;
 <Page theme={theme} themedCopy={theme} slug="index" title={d.title}
       headTitle={d.headTitle} description={d.description} nav={d.nav}
       kicker={d.kicker} dek={d.dek}>
-  <Content components={{ a: Link }} />
+  <Content components={elementsFor(theme)} />
 </Page>

@@ -1,0 +1,15 @@
+---
+/** case-meta / field-pairs — a description list.
+ *  The claim: named fields of one record. A reader may look up "Scale"
+ *  without reading the rest. */
+import type { Field } from '../types';
+const { items } = Astro.props as { items: Field[] };
+---
+<dl class="case-meta case-meta-field-pairs">
+  {items.map(f => (
+    <div data-content-item>
+      <dt class="k">{f.k}</dt>
+      <dd>{f.v}</dd>
+    </div>
+  ))}
+</dl>

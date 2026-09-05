@@ -1,16 +1,16 @@
 ---
-import { themeBase, themeOf } from '../lib/site';
+import { withBase } from '../lib/site';
 
 /** Content writes ordinary root-absolute links (`/problems/`). MDX maps both
- *  markdown links and literal <a> elements through here, so a reader stays
- *  inside whichever theme copy they are reading — and every such link picks
- *  up the deploy's base path. The theme is derived from the URL being
- *  rendered, which keeps this component self-contained. */
+ *  markdown links and literal <a> elements through here so every one of them
+ *  picks up the deploy's base path — Astro only rewrites the URLs it generates
+ *  itself, and a hand-written root-absolute href 404s on a project site
+ *  without it. That failure is invisible locally at the root and total live,
+ *  which is why a test fails any href in the output that is missing it. */
 const { href, ...rest } = Astro.props;
-const base = themeBase(themeOf(Astro.url.pathname));
 const out =
   typeof href === 'string' && href.startsWith('/') && !href.startsWith('//')
-    ? base + href
+    ? withBase(href)
     : href;
 ---
 <a href={out} {...rest}><slot /></a>

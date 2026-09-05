@@ -1,8 +1,5 @@
 ---
-import { NAV, EMAIL } from '../lib/site';
-import ThemeSwitcher from './ThemeSwitcher.astro';
-interface Props { base: string; slug: string; current?: string }
-const { base, slug, current } = Astro.props;
+import { NAV, EMAIL, BASE } from '../lib/site';
 ---
 <footer class="colophon grid">
   <div class="inner">
@@ -11,10 +8,9 @@ const { base, slug, current } = Astro.props;
       <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
     </p>
     <ul>
-      <li><a href={`${base}/`}>Home</a></li>
-      {NAV.map(i => <li><a href={`${base}${i.href}`}>{i.label}</a></li>)}
+      <li><a href={`${BASE}/`}>Home</a></li>
+      {NAV.map(i => <li><a href={`${BASE}${i.href}`}>{i.label}</a></li>)}
       <li><a href="https://github.com/alexfinnarn" rel="me">GitHub</a></li>
     </ul>
   </div>
-  <ThemeSwitcher slug={slug} current={current} />
 </footer>

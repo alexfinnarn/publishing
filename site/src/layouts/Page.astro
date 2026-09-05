@@ -1,14 +1,13 @@
 ---
 import '../styles/base.css';
-import Masthead from '../components/Masthead.astro';
-import BroadsheetMasthead from '../components/BroadsheetMasthead.astro';
 import Colophon from '../components/Colophon.astro';
-import { themeBase, withBase } from '../lib/site';
+import { BASE, withBase } from '../lib/site';
+import { themeOrDie } from '../lib/themes';
 
 interface Props {
   theme: string;
   slug: string;
-  /** Set on the per-theme copies; undefined on the curated one. */
+  /** Set only by the THEME_MATRIX test fixture, never by the site. */
   themedCopy?: string;
   title: string;
   headTitle?: string;
@@ -21,23 +20,24 @@ interface Props {
 const { theme, slug, themedCopy, title, headTitle, description = '',
         nav = 'none', kicker, dek } = Astro.props;
 
-const base = themeBase(themedCopy);
+const base = BASE;
 // data-page lets a theme treat one page specially — broadsheet turns the
 // front page into a lead-story layout with it.
 const page = slug.replace(/\//g, '-');
-const Chrome = theme === 'broadsheet' ? BroadsheetMasthead : Masthead;
+// A theme supplies its own chrome when the furniture has to change shape, and
+// inherits the plain masthead when it does not. Everything below <main> is
+// the same in every theme.
+const { Chrome } = themeOrDie(theme);
 
 const fullTitle = headTitle ?? `${title} — Alex Finnarn`;
 
-// Canonical always points at the curated copy: /t/<theme>/about/ and /about/
-// are the same page wearing different clothes, and only one of them should
-// be the address anyone links to. (Astro emits the 404 as a file, not a
-// directory, so it is the one path that keeps an extension.)
-const curatedPath =
+// Each page has one address. (Astro emits the 404 as a file, not a directory,
+// so it is the one path that keeps an extension.)
+const canonicalPath =
   slug === 'index' ? '/' : slug === '404' ? '/404.html' : `/${slug}/`;
-const canonical = new URL(withBase(curatedPath), Astro.site);
-// A themed copy is a duplicate by design, and a 404 is not an address.
-// Follow the links either way so the curated pages still get found.
+const canonical = new URL(withBase(canonicalPath), Astro.site);
+// A 404 is not an address. Fixture copies are never deployed, but they carry
+// noindex too so a stray build cannot be crawled. Links stay followable.
 const noindex = Boolean(themedCopy) || slug === '404';
 ---
 <!doctype html>
@@ -74,6 +74,6 @@ const noindex = Boolean(themedCopy) || slug === '404';
     <slot />
   </main>
 
-  <Colophon base={base} slug={slug} current={themedCopy} />
+  <Colophon />
 </body>
 </html>
