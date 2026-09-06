@@ -1,15 +1,17 @@
 # Consultant sites
 
-Four sites, visited 2026-08-18. My words, not a summary of them. A polite
-paraphrase of this got written once and it was worse than the original, so
-the original stays.
+Four sites, visited 2026-08-18. I went through each and simply marked my reaction to 
+them. I was supposed to follow a template and answer a prompt, but hahahahahaha...I 
+did what I wanted!
 
 The useful questions after a visit: did I want to stay, could I see a
 problem of mine, was there a next step that was not a generic form. Also
 notice whether they lead with the stack, the critique, the outcome, or
 nothing you can feel.
 
-Four was enough. Add a fifth only when one of these stops teaching.
+Four was enough for an initial thought experiment of what I want in my site, but maybe 
+we should revisit this when getting further into the consulting site so we can 
+periodically review other, leading sites.
 
 ---
 

@@ -1,20 +1,12 @@
 # Books
 
-Nothing here yet. A book exists when there is a title, an order, and a
-reader who should start at chapter 1.
-
-Two clusters in the playground essays could become one:
-
-- **AI / agents / how-not-to** — 9 of the 14 essays are tagged `AI`
-  (`002`, `004`, `006`, `007`, `008`, `009`, `012`, `013`, `014`).
-  `writing/classifier-stack.md` and `writing/three-ideas.md` are 2,600
-  words already pointed at this.
-- **CMS First Principles** — `003`, `010`, `011`, `012`. Four essays,
-  a shared thesis. Three of the four are also tagged `AI`.
-
-Add a `<slug>/` directory when an outline names an order.
+Nothing here yet, but I hope to write books in the future, which could be a collection 
+born from posts on this or another blog site.
 
 Publishing a book later probably means [Writebook](https://github.com/basecamp/writebook)
-(self-hosted, one install is a library, web-only, no import/export). Draft
-in markdown here; paste there. A clone already sits at
-`~/Sites/personal/writebook` — do not make another.
+(self-hosted, one install is a library, web-only, no import/export). Writing would be 
+done on the deployed app.
+
+A clone already sits at `~/Sites/personal/writebook`, but I am not sure how old that 
+is or if Writebook has updated how you download and install it. Used to require an 
+email, but now I think it might be more accessible and easy to install from GitHub.
