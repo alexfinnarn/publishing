@@ -1,33 +1,24 @@
 # Publishing
 
-My professional surface: a **consulting site** worth seeing, the **writing**
-that comes out of the same work, and any **book** that writing turns into.
+This repository is to help me get back to publishing content on the web. 
 
-What it is for, in order:
+I do have my old blog site at `~/Sites/personal/content`
+(https://alexfinnarn.github.io/), and it would be fun to explore that site and how it 
+is different from this effort. I generally was trying to show projects along with blog 
+posts in a very traditional sense. So, it could still be used to write within if this 
+site is taking longer to build.
 
-1. Get me publishing again. Last piece went out 2025-07-27.
-2. Be a web presence a stranger can read fast — if I get laid off, this is
-   what I point at.
-3. Make the case that I am a consultant, not between jobs.
-4. Stay at the front of where the work is actually going.
+## This project is a work-in-proress
 
-The personal playground stays at `~/Sites/personal/content`
-(https://alexfinnarn.github.io/). Mick (`~/Sites/personal/mick`) stays the
-private orientation layer. Neither is this.
+We need to explore ideas to properly build a decent consulting site. 
 
-## This markdown is a working draft
+To start, we can use a very boring, generic setup just to get some content down. Then, 
+the idea is to add as much interactivity as possible. 
 
-My direction in conversation outranks every file in this repo. Much of this
-prose was written by a model from my prompts — it is a first draft, not my
-settled position, and it has no authority over me.
-
-Trying something new, changing my mind, throwing away working code, or
-replacing the vocabulary is the method, not a failure mode. Do not quote a
-file back at me as a reason not to try something. If a doc conflicts with
-what I want now, the doc is wrong — change the doc.
-
-Words that mean something specific here: none yet. Essay, work, page, site
-are ordinary English until something actually forces a distinction.
+The provisional [theme concepts and policies](themes/README.md) defines the first 
+experiment in interactivity with creating a theme concept that can be applied to a 
+collection of content and end up with a rendered page. Still very much a 
+work-in-progress as well.
 
 ## Layout
 
@@ -37,23 +28,15 @@ are ordinary English until something actually forces a distinction.
 | `site/` | The consulting website. Code, plus a short note on the two serving rules |
 | `writing/` | Drafts. Long-form thinking that has not been published yet |
 | `references/` | Lists and pointers that came from somewhere else |
+| `themes/` | Framework-independent communication policies and the process for applying them |
 | `books/` | Empty until an outline has an order someone would read |
 
 ## Working record
 
-GitHub issues, not files here. The issues carry more than these docs do —
-[#11](https://github.com/alexfinnarn/publishing/issues/11) is the full build
-brief for the site, [#9](https://github.com/alexfinnarn/publishing/issues/9)
-is a researched essay waiting to be written.
+GitHub issues, not files here. We work 
+within https://github.com/alexfinnarn/publishing/issues so that the ephemeral planning 
+and work communication does not get tied into the durable docs and code.
 
-Labels: `site`, `writing`, `discovery`. Nothing else. An issue can carry two
-if it genuinely is two.
+The issue labels are: `site`, `writing`, `discovery`, but I am not sure we are using 
+them that much yet.
 
-Closed background: [#1](https://github.com/alexfinnarn/publishing/issues/1)
-starting up, [#2](https://github.com/alexfinnarn/publishing/issues/2) writing
-after the job, [#3](https://github.com/alexfinnarn/publishing/issues/3) one
-layer too many, [#4](https://github.com/alexfinnarn/publishing/issues/4) open
-input and classifiers, [#5](https://github.com/alexfinnarn/publishing/issues/5)
-four consultant sites, [#6](https://github.com/alexfinnarn/publishing/issues/6)
-one interaction, [#7](https://github.com/alexfinnarn/publishing/issues/7)
-classifier stack and ink.

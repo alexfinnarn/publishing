@@ -1,10 +1,10 @@
 # Inventory
 
-What is real. Build pages from this file — everything here is checkable.
+Here lies an inventory of some of the things I have done in my career.
 
-## Proof (real)
+## Resume Information/Past Jobs
 
-From the 2025 résumé and the CMS essays. Outcomes stay as stated; do not inflate.
+From the 2025 résumé and the CMS essays.
 
 - **CivicActions** (2022–2024), Senior Backend Drupal Engineer, federal (VA, CMS)
   - Ionic/Angular Medicare mobile app upgrade under a deadline
@@ -27,14 +27,29 @@ From the 2025 résumé and the CMS essays. Outcomes stay as stated; do not infla
 - ~12 years in CMS work, mostly Drupal; has run production, not only tickets
 - Psychology BS, Ohio State (2009) — only if it earns a sentence; don’t lead with it
 
-Left CivicActions late 2024. That is context, not a branding story unless we
-choose it.
+Left CivicActions late 2024 to try my hand at some wild ideas:
 
-These are ingredients for **problem sets**, not a required Proof page.
+- start a food truck out of a converted cargo trailer. This did not get far.
+- Convert a shipping container to live in. I did get two windows, a door, and a roof 
+  on a container before I decided I needed to go back to work to earn more money. 
 
-## Thesis already on paper (playground essays)
+## Currently Doing
 
-These live in `~/Sites/personal/content/src/content/writing/`.
+I now work at the University of Denver in the IT department's web team working on 
+around 20 Drupal sites with growing needs for WordPress and other things...as the 
+university lays people off.
+
+The university is pretty dysfunctional and does not have good project management 
+discipline. Hence, why I am trying to create my own business site to see if I can draw 
+in any clients.
+
+## Writing Ideas
+
+These ideas should live in `~/Sites/personal/content/src/content/writing/`.
+
+My site at `~/Sites/personal/content` (https://alexfinnarn.github.io/) has content on 
+it, and here are some of the titles to give you an idea of what I have written about 
+in the past.
 
 **CMS First Principles** (strongest series → possible book)
 
@@ -57,49 +72,20 @@ These live in `~/Sites/personal/content/src/content/writing/`.
 9 of the 14 are tagged `AI` — including three of the four CMS ones. The
 corpus is more about AI than the folder names suggest.
 
-## Craft that can graduate
+## Other Interactive Ideas
 
-Playground work that already shows what a web developer can do. Real, and
-available whenever a page wants a live example:
+I want this site to be as creative as possible and so there are some things that could 
+be used in that regard:
 
 - ink / choose-your-own-adventure personal site
 - Three.js shipping-container piece
 - Visual-novel career experiment
 - Garden / home-automation as systems, if the problem is systems
 
-Rebuild on the Site rather than linking to a dusty demo if the demo has to
-feel current.
+These are all half-baked on the `~/Sites/personal/content` but might be useful for 
+this consulting site.
 
-## Informal (stay on the playground unless they earn a sentence)
+## Content Still Missing
 
-- `001` Dicking Around With Windows
-- Notes that are only for people who already know you
-
-## Invented (do not reuse)
-
-The playground `/work` page (`src/pages/work.astro`) is a template:
-
-- Generic “Web Developer & Consultant” subtitle
-- Service cards (frontend / full-stack / performance / technical consulting)
-- Fake projects (e-commerce +40% conversion, Three.js dashboard, headless CMS
-  case study, real-time collab tool)
-- Fake testimonials (Sarah Johnson / Michael Chen / Emma Rodriguez)
-- Placeholder email, LinkedIn, Calendly
-- “Available February 2025”
-
-None of that gets ported. A real Three.js piece is not the same thing as a
-fake “Three.js dashboard” card. (An availability line itself is fine — it
-was the invented date that was the problem.)
-
-## Still missing
-
-- The pages themselves ([#11](https://github.com/alexfinnarn/publishing/issues/11))
-- A working offer sentence for Home. Résumé title is still “Senior Full
-  Stack Engineer.”
-- Domain and host
-- Photos
-- Real quotes, if any ever exist — none until they do
-
-Decided in [#11](https://github.com/alexfinnarn/publishing/issues/11):
-federal work gets named short for v1 (CivicActions, VA and CMS, no program
-detail). Contact is a real mailto.
+I am using AI agents to help me build this and still missing my own content. So beware 
+pf the current content until it is updated more.
