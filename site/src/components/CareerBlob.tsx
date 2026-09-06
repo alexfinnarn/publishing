@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 
 /** A CMS that outgrew its shape.
  *
@@ -7,12 +7,13 @@ import { useEffect, useRef, useState } from 'react';
  *  stage produces the same number of points, any two shapes interpolate
  *  cleanly — no path-morphing library, no matched control points.
  *
- *  Facts come from inventory.md. Nothing here is invented.
+ *  Career facts come from inventory.md; the shapes are visual interpretations.
  */
 
 type Stage = {
   years: string;
   where: string;
+  shortWhere: string;
   /** the checkable fact that gives the shape its weight */
   proof: string;
   what: string;
@@ -26,37 +27,37 @@ type Stage = {
 
 const STAGES: Stage[] = [
   {
-    years: '2013–2014', where: 'Sogeti',
+    years: '2013–2014', where: 'Sogeti', shortWhere: 'Sogeti',
     proof: '1 multisite · team of 4',
     what: 'One Drupal 7 multisite for Ethicon, an offshore team of four. Small, regular, the shape someone actually drew.',
     lobes: 3, wobble: 0.08, scale: 0.44,
   },
   {
-    years: '2014–2015', where: 'Coplex',
-    proof: '15–20 client sites',
-    what: 'Fifteen to twenty client sites under maintenance. Not one big thing — many small ones, each with its own edge.',
+    years: '2014–2015', where: 'Coplex', shortWhere: 'Coplex',
+    proof: '15–20 clients',
+    what: 'Maintenance work for fifteen to twenty clients. Not one big thing — many small ones, each with its own edge.',
     lobes: 11, wobble: 0.30, scale: 0.60,
   },
   {
-    years: '2015–2019', where: 'University of Colorado',
+    years: '2015–2019', where: 'University of Colorado', shortWhere: 'CU',
     proof: '1,000+ sites · 50+ repositories',
     what: 'A Vue UI deploying to over a thousand sites, CI across fifty repositories. Big, and pulling in every direction at once.',
     lobes: 8, wobble: 0.52, scale: 0.94,
   },
   {
-    years: '2019', where: 'Highlights for Children',
+    years: '2019', where: 'Highlights for Children', shortWhere: 'Highlights',
     proof: 'Drupal 7 → Drupal 8',
     what: 'A Drupal 7 family of sites, and the beginning of the D8 platform. A shape mid-way through becoming another shape.',
     lobes: 5, wobble: 0.38, scale: 0.70,
   },
   {
-    years: '2020–2022', where: 'University of Colorado',
-    proof: '$5.4M processed annually',
-    what: 'The giving platform — $5.4M a year through one system. One heavy lobe that could not be allowed to fail.',
+    years: '2020–2022', where: 'University of Colorado', shortWhere: 'CU',
+    proof: '≈$5.4M annually',
+    what: 'The giving platform — about $5.4M a year through one system. One heavy lobe that could not be allowed to fail.',
     lobes: 4, wobble: 0.44, scale: 0.78,
   },
   {
-    years: '2022–2024', where: 'CivicActions',
+    years: '2022–2024', where: 'CivicActions', shortWhere: 'CivicActions',
     proof: '≈15 federal Drupal sites',
     what: 'Federal publishing across roughly fifteen Drupal sites. Large, lobed, and every lobe answerable to someone.',
     lobes: 7, wobble: 0.34, scale: 1.0,
@@ -68,14 +69,13 @@ const SIZE = 260;
 
 /** Radii for one stage, sampled at POINTS around the circle. */
 function radii(s: Stage): number[] {
-  // Fill more of the viewBox than the original thumbnail-sized treatment.
-  // Even the smallest stage keeps a broad, quiet centre for its proof text.
-  const base = 58 + s.scale * 64;
+  // Keep a broad centre for the text and leave room for every lobe.
+  const base = 112 + s.scale * 12;
   return Array.from({ length: POINTS }, (_, i) => {
     const a = (i / POINTS) * Math.PI * 2;
     const lobe = Math.sin(a * s.lobes);
     const detail = Math.sin(a * (s.lobes * 2 + 1) + 1.7) * 0.35;
-    return base * (1 + s.wobble * (lobe + detail) * 0.55);
+    return base * (1 + s.wobble * (lobe + detail) * 0.35);
   });
 }
 
@@ -100,6 +100,7 @@ function toPath(r: number[]): string {
 const ease = (t: number) => (t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2);
 
 export default function CareerBlob() {
+  const paintId = useId();
   const [active, setActive] = useState(0);
   const [path, setPath] = useState(() => toPath(radii(STAGES[0])));
   const from = useRef(radii(STAGES[0]));
@@ -137,18 +138,23 @@ export default function CareerBlob() {
   const s = STAGES[active];
 
   return (
-    <div className={`blob blob-tone-${active % 3}`}>
+    <div className={`blob blob-tone-${active}`}>
       <p className="blob-hint">
-        One career, six system shapes. Each is a visual metaphor for how many
-        things were in play and how far the platform had drifted from anything
-        one person would design.
+        Six chapters of my work with web platforms. Choose a stage to explore
+        the teams, sites, and systems involved.
       </p>
 
       <div className="blob-canvas">
         <div className="blob-figure">
-          <svg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img"
+          <svg viewBox={`-40 -40 ${SIZE + 80} ${SIZE + 80}`} role="img"
                aria-label={`An abstract shape representing ${s.where}, ${s.years}`}>
-            <path className="blob-shape" d={path} />
+            <defs>
+              <linearGradient id={paintId} x1="0" y1="0" x2="1" y2="1">
+                <stop className="blob-paint-start" offset="0%" />
+                <stop className="blob-paint-end" offset="100%" />
+              </linearGradient>
+            </defs>
+            <path className="blob-shape" d={path} fill={`url(#${paintId})`} />
           </svg>
         </div>
 
@@ -166,7 +172,8 @@ export default function CareerBlob() {
                     onClick={() => setActive(i)}
                     aria-label={`${st.where}, ${st.years}`}
                     aria-pressed={i === active}
-                    data-where={st.where}>
+                    data-where={st.where}
+                    data-short-where={st.shortWhere}>
               <span>{st.years}</span>
             </button>
           ))}
