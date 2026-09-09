@@ -328,42 +328,132 @@ a.email { font-size: var(--step-1); font-weight: var(--font-weight-6); }
 
 /* ---------- career blob island (problems, "outgrew its shape") ---------- */
 
+/* Local paint colors keep the illustration consistent across page themes. */
 .blob {
+  --blob-fill: #176b78;
+  --blob-end: #244c88;
+  --blob-text: #fff;
+  --blob-wash: #65c8cc;
+  --blob-wash-other: #edb0cf;
+  inline-size: min(72rem, calc(100vw - (var(--gutter) * 2)), calc(100% + (var(--breakout) * 2)));
+  position: relative; inset-inline-start: 50%; transform: translateX(-50%);
+  isolation: isolate;
   display: grid; gap: var(--size-5);
-  grid-template-columns: minmax(0, 1fr);
-  align-items: center;
-  margin-block: var(--size-6);
-  padding: var(--size-5);
-  background: var(--paper-warm);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-3);
+  margin-block: var(--size-7) var(--size-8);
+  padding-block: var(--size-5);
 }
-@container (min-width: 34rem) {
-  .blob { grid-template-columns: 15rem minmax(0, 1fr); }
+.blob-tone-1 {
+  --blob-fill: #ffd08f; --blob-end: #efa191; --blob-text: #35252c;
+  --blob-wash: #efa66f; --blob-wash-other: #efbad3;
 }
-
+.blob-tone-2 {
+  --blob-fill: #bba3eb; --blob-end: #92bbed; --blob-text: #232647;
+  --blob-wash: #ac90db; --blob-wash-other: #80c5de;
+}
+.blob-tone-3 {
+  --blob-fill: #984468; --blob-end: #75365e;
+  --blob-wash: #e6a0b3; --blob-wash-other: #efc17d;
+}
+.blob-tone-4 {
+  --blob-fill: #9bdbbd; --blob-end: #79c5cf; --blob-text: #173c3a;
+  --blob-wash: #7fc7b0; --blob-wash-other: #c3c984;
+}
+.blob-tone-5 {
+  --blob-fill: #f5b28c; --blob-end: #e994b0; --blob-text: #412334;
+  --blob-wash: #ed9e80; --blob-wash-other: #c6a3e6;
+}
+.blob-hint {
+  max-inline-size: 52ch; margin: 0 auto; padding-inline: var(--size-4);
+  text-align: center; font-size: var(--font-size-1); color: var(--ink);
+}
+.blob-canvas {
+  position: relative; isolation: isolate; display: grid; place-items: center;
+  inline-size: min(100%, 38rem); margin-inline: auto;
+}
+/* Overlapping translucent washes soften the edges without blurring the text. */
+.blob-canvas::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  inset: 2% -12%; border-radius: 43% 57% 62% 38% / 56% 38% 62% 44%;
+  background:
+    radial-gradient(ellipse at 26% 34%, color-mix(in srgb, var(--blob-wash) 58%, transparent), transparent 57%),
+    radial-gradient(ellipse at 76% 62%, color-mix(in srgb, var(--blob-wash-other) 58%, transparent), transparent 55%),
+    radial-gradient(ellipse at 43% 78%, color-mix(in srgb, var(--blob-wash) 30%, transparent), transparent 48%);
+  filter: blur(14px);
+}
+.blob-figure { grid-area: 1 / 1; inline-size: 100%; }
 .blob-figure svg { inline-size: 100%; block-size: auto; display: block; }
-.blob-figure path { fill: var(--accent); opacity: .16; stroke: var(--accent); stroke-width: 1.5; }
-
-.blob-hint  { font-size: var(--font-size-1); color: var(--ink-soft); }
-.blob-where { margin-block-end: var(--size-1); }
-.blob-what  { margin-block-end: 0; min-block-size: 4.5em; }
-
+.blob-paint-start { stop-color: var(--blob-fill); }
+.blob-paint-end { stop-color: var(--blob-end); }
+.blob-figure stop { transition: stop-color .35s; }
+.blob-proof {
+  grid-area: 1 / 1; z-index: 1; pointer-events: none;
+  inline-size: 54%; text-align: center; color: var(--blob-text);
+  display: grid; justify-items: center; gap: var(--size-2);
+  transition: color .35s;
+}
+.blob-proof > span:first-child {
+  font-size: var(--font-size-0);
+  letter-spacing: var(--font-letterspacing-2); text-transform: uppercase;
+}
+.blob-proof strong {
+  max-inline-size: 13ch; font-family: var(--font-display);
+  font-size: clamp(1.25rem, 3.5vw, 2.75rem); line-height: 1.08;
+  text-wrap: balance;
+}
+.blob-proof > span:last-child { font-size: var(--font-size-1); text-wrap: balance; }
+.blob-body { display: grid; gap: var(--size-5); }
+.blob-what {
+  max-inline-size: 54ch; min-block-size: 3em;
+  margin: 0 auto; padding-inline: var(--size-4); text-align: center;
+}
 .blob-controls {
-  display: flex; flex-wrap: wrap; gap: var(--size-2);
-  margin-block: var(--size-4);
+  position: relative;
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--size-2); margin: 0; padding-inline: var(--size-3);
+}
+.blob-controls::before {
+  content: ""; position: absolute; z-index: -1;
+  inset-inline: var(--size-7); inset-block-start: .875rem;
+  border-block-start: 1px solid var(--rule);
 }
 .blob-controls button {
+  min-inline-size: 0; display: grid; justify-items: center;
+  align-content: start; gap: var(--size-2);
   font: inherit; font-size: var(--font-size-0); cursor: pointer;
-  padding: var(--size-1) var(--size-3);
-  border: 1px solid var(--rule); border-radius: var(--radius-round);
-  background: var(--paper); color: var(--ink-soft);
+  padding: var(--size-1); border: 0; border-radius: var(--radius-2);
+  background: transparent; color: var(--ink);
   font-variant-numeric: tabular-nums;
-  transition: background .15s, border-color .15s, color .15s;
 }
-.blob-controls button:hover { border-color: var(--accent); color: var(--accent); }
-.blob-controls button[aria-pressed="true"] {
-  background: var(--ink); border-color: var(--ink); color: var(--paper);
+.blob-controls button > span { white-space: nowrap; }
+.blob-controls button::before {
+  content: ""; inline-size: .75rem; block-size: .75rem;
+  border: 2px solid var(--paper); border-radius: var(--radius-round);
+  background: var(--ink-soft); box-shadow: 0 0 0 1px var(--ink-soft);
+  transition: background .15s, transform .15s;
+}
+.blob-controls button:hover { background: var(--paper-warm); }
+.blob-controls button[aria-pressed="true"] { font-weight: var(--font-weight-7); }
+.blob-controls button[aria-pressed="true"]::before {
+  background: var(--blob-fill); box-shadow: 0 0 0 2px var(--ink);
+  transform: scale(1.25);
+}
+.blob-controls button::after {
+  content: attr(data-where); font-weight: var(--font-weight-6);
+  font-size: var(--font-size-0); line-height: 1.3;
+}
+@media (width < 42rem) {
+  .blob { inline-size: calc(100vw - (var(--gutter) * 2)); gap: var(--size-4); }
+  .blob-canvas::before { inset-inline: 0; filter: blur(8px); }
+  .blob-proof { inline-size: 55%; gap: var(--size-1); }
+  .blob-proof strong { font-size: clamp(1.125rem, 5.5vw, 2rem); }
+  .blob-proof > span { font-size: .75rem; }
+  .blob-proof > span:last-child { max-inline-size: 20ch; }
+  .blob-controls {
+    grid-template-columns: repeat(3, 1fr); gap: var(--size-3) var(--size-1);
+    padding-inline: 0;
+  }
+  .blob-controls::before { display: none; }
+  .blob-controls button::after { content: attr(data-short-where); }
 }
 
 /* No JS: the buttons cannot do anything, so hide them rather than offer a
