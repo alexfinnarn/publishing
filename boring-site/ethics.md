@@ -2,13 +2,13 @@
 
 Plenty of people discuss ethics these days. They tell you about companies they do not like since they "are unethical" but fail to be super specific about what they mean by that. 
 
-It pays to stop and think of one's own ethical principles that you live your life by. Then, when you hear someone declare a whole company unethical, you can conside your ethics to see if they match. 
+It pays to stop and think of one's own ethical principles you live your life by. Because then, when you hear someone declare a whole company unethical, you can conside your ethics to see if they match...and judge how much BS the someone is declaring at you. 
 
 ## Pursue Truth
 
-At the top of my list is The Truth. I think we can capitalize it and avoid nonsensical discussions of "your truths" and "my truths". Having multiple truths renders the word meaningless so you must be actually meaning something else when you say it. 
+At the top of my list is The Truth. I think we can capitalize it and avoid nonsensical discussions of "your truths" and "my truths". Having multiple truths renders the word meaningless so you must mean something else when you say it. 
 
-In pursuing truth, you will come to heads with your self mostly. Selves are like that and don't like bending. They enjoy partisanship and parties. The truth knows know part but only knows its self. Bold and true.
+In pursuing truth, you will come to heads with your self mostly. Selves are like that and don't like bending. They enjoy partisanship and parties. The truth knows no part but only knows its self. Bold and true.
 
 ## Mix It Up
 
